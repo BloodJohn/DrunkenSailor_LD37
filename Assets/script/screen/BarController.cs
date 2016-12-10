@@ -11,8 +11,10 @@ public class BarController : MonoBehaviour
 
     /// <summary>обучающие стрелки косить сено</summary>
     public Image helpHay;
-    /// <summary>префаб "клиента"</summary>
-    public GameObject sheepPrefab;
+
+    /// <summary>места для посадки клиентов</summary>
+    public BarstoolController[] clientList;
+    
     /// <summary>префаб выбранного ингридиента</summary>
     public GameObject itemClick;
     #endregion
@@ -50,6 +52,10 @@ public class BarController : MonoBehaviour
 
             }
         }
+
+        CoreGame.Instance.TurnTime(Time.deltaTime);
+
+        ShowStats();
     }
 
     public void WinterClick()
@@ -67,7 +73,10 @@ public class BarController : MonoBehaviour
     #region stuff
     private void ShowStats()
     {
-        //title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
+        for (var i = 0; i < clientList.Length; i++)
+        {
+            clientList[i].ShowState();
+        }
     }
 
     private void MediumCoffeClick(Vector2 point)
@@ -97,7 +106,7 @@ public class BarController : MonoBehaviour
         Destroy(item, 3f);
     }
 
-    private void CreateSheep()
+    /*private void CreateSheep()
     {
         var cnt = 0;
         var height = Camera.allCameras[0].orthographicSize;
@@ -113,13 +122,13 @@ public class BarController : MonoBehaviour
             {
                 if (hit.transform.name.Contains("land"))
                 {
-                    var item = (GameObject)Instantiate(sheepPrefab, transform);
+                    var item = (GameObject)Instantiate(lumbermanPrefab, transform);
                     item.transform.position = new Vector3(point.x, point.y, 0f);
                     return;
                 }
             }
         }
-    }
+    }*/
     #endregion
 
     #region achievements

@@ -2,7 +2,6 @@
 using GooglePlayGames.BasicApi;
 using SmartLocalization;*/
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LoadController : MonoBehaviour
 {
