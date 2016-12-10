@@ -9,12 +9,10 @@ public class BarController : MonoBehaviour
     #region variables
     public const string sceneName = "bar";
 
-    /// <summary>обучающие стрелки косить сено</summary>
-    public Image helpHay;
-
     /// <summary>места для посадки клиентов</summary>
     public BarstoolController[] clientList;
 
+    public Text liveText;
     #endregion
 
     #region unity
@@ -65,27 +63,13 @@ public class BarController : MonoBehaviour
     #region stuff
     private void ShowStats()
     {
+        if (CoreGame.Instance==null) return;
+
         for (var i = 0; i < clientList.Length; i++)
-        {
             clientList[i].ShowState();
-        }
+
+        liveText.text = string.Format("{0}/{1}",CoreGame.Instance.ScoreCount, CoreGame.Instance.LiveCount);
     }
-
-    private void MediumCoffeClick(Vector2 point)
-    {
-        Debug.LogFormat("MediumCoffeClick");
-
-        /*helpHay.gameObject.SetActive(false);
-
-        var stone = CoreGame.Instance.HaylageBar();
-        ShowStats();
-
-        var prefab = haylagePrefab;
-
-        var item = (GameObject)Instantiate(prefab, transform);
-        item.transform.position = new Vector3(point.x, point.y, 0f);*/
-    }
-
 
     private void CheeseCakeClick(Vector2 point, ItemButton clickItem)
     {

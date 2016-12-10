@@ -15,8 +15,9 @@ public class BarstoolController : MonoBehaviour
             lumberman.SetActive(false);
         else
         {
+            //включаем или отключаем показ дровосека
             lumberman.SetActive(item.IsOnline);
-            item.isView = item.IsOnline;
+            item.UpdateStatus();
         }
     }
 }

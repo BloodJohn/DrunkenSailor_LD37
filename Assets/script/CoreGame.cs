@@ -20,8 +20,12 @@ public class CoreGame : MonoBehaviour
     public static CoreGame Instance;
 
 
-    /// <summary>дней</summary>
+    /// <summary>время в игре</summary>
     public float GameTime;
+    /// <summary>сколько попыток</summary>
+    public int LiveCount;
+    /// <summary>сколько довольных клиентов</summary>
+    public int ScoreCount;
 
     private List<BarCustomer> customerList = new List<BarCustomer>();
     #endregion
@@ -40,6 +44,8 @@ public class CoreGame : MonoBehaviour
     public void RestartGame()
     {
         GameTime = 0f;
+        ScoreCount = 0;
+        LiveCount = 10;
         SceneManager.LoadScene(BarController.sceneName);
     }
 
@@ -95,10 +101,11 @@ public class CoreGame : MonoBehaviour
     public BarCustomer GetCustomer(int index)
     {
         foreach (var item in customerList)
-        {
-            if (item.index == index && item.IsOnline) return item;
-        }
-
+            if (item.index == index)
+            {
+                if (item.IsOnline) return item;
+                if (item.isView) return item;
+            }
 
         return null;
     }
@@ -106,9 +113,11 @@ public class CoreGame : MonoBehaviour
     public bool ClickItem(GoodType itemType)
     {
         foreach (var item in customerList)
-            if (item.IsOnline)
+            if (item.isView && !item.isSatisfied)
             {
                 item.finish = Mathf.Min(GameTime + 0.5f, item.finish);
+                item.isSatisfied = true;
+                ScoreCount++;
                 break;
             }
 
@@ -120,6 +129,7 @@ public class CoreGame : MonoBehaviour
     public class BarCustomer
     {
         public bool isView;
+        public bool isSatisfied;
         public int index;
         public float start;
         public float finish;
@@ -130,6 +140,7 @@ public class CoreGame : MonoBehaviour
             start = CoreGame.Instance.GameTime;
             finish = start + 10f;
             isView = false;
+            isSatisfied = false;
         }
 
         public bool IsOnline
@@ -139,6 +150,17 @@ public class CoreGame : MonoBehaviour
                 var time = CoreGame.Instance.GameTime;
                 return time > start && time < finish;
             }
+        }
+
+        public void UpdateStatus()
+        {
+            var newStatus = IsOnline;
+            if (newStatus == isView) return;
+            //отнимаем очки если покупатель не дождался заказа
+            if (!newStatus && isView && !isSatisfied)
+                CoreGame.Instance.LiveCount--;
+
+            isView = IsOnline;
         }
     }
 }
