@@ -37,7 +37,7 @@ public class BarController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
-        if (CoreGame.Instance.DayCount <= 0) return;
+        //if (CoreGame.Instance.DayCount <= 0) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -45,7 +45,7 @@ public class BarController : MonoBehaviour
             var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
             if (hit.transform != null)
             {
-                if (hit.transform.name.Contains("land")) HaylageClick(hit.point);
+                if (hit.transform.name.Contains("mediumCoffe")) MediumCoffeClick(hit.point);
             }
         }
     }
@@ -68,9 +68,11 @@ public class BarController : MonoBehaviour
         //title.text = string.Format(LanguageManager.Instance.GetTextValue("summer_title"), CoreGame.Instance.DayCount);
     }
 
-    private void HaylageClick(Vector2 point)
+    private void MediumCoffeClick(Vector2 point)
     {
-        helpHay.gameObject.SetActive(false);
+        Debug.LogFormat("MediumCoffeClick");
+
+        /*helpHay.gameObject.SetActive(false);
 
         var stone = CoreGame.Instance.HaylageBar();
         ShowStats();
@@ -78,7 +80,7 @@ public class BarController : MonoBehaviour
         var prefab = haylagePrefab;
 
         var item = (GameObject)Instantiate(prefab, transform);
-        item.transform.position = new Vector3(point.x, point.y, 0f);
+        item.transform.position = new Vector3(point.x, point.y, 0f);*/
     }
 
     private void CreateSheep()
