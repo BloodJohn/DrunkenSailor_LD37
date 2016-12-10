@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +17,6 @@ public class CoreGame : MonoBehaviour
 
     #region variables
     public static CoreGame Instance;
-
 
     /// <summary>время в игре</summary>
     public float GameTime;

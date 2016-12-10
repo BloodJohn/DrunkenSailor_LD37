@@ -11,6 +11,10 @@ public class BarController : MonoBehaviour
 
     /// <summary>места для посадки клиентов</summary>
     public BarstoolController[] clientList;
+    /// <summary>Список всех спрайтов</summary>
+    public Sprite[] GoodSprite;
+    /// <summary>Анимация товара при клике</summary>
+    public GameObject ItemPrefab;
 
     public Text liveText;
     #endregion
@@ -78,8 +82,9 @@ public class BarController : MonoBehaviour
 
         if (result)
         {
-            var item = (GameObject) Instantiate(clickItem.ItemPrefab, transform);
+            var item = (GameObject) Instantiate(ItemPrefab, transform);
             item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
+            item.GetComponentInChildren<SpriteRenderer>().sprite = GoodSprite[(int) clickItem.ItemType];
             Destroy(item, 3f);
         }
     }
