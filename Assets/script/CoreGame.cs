@@ -5,10 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class CoreGame : MonoBehaviour
 {
-    #region variables
-    public static CoreGame Instance;
+    #region const
     /// <summary>Ключ куда мы сохраним игру</summary>
     public const string GameSaveKey = "gameSave";
+    /// <summary>типы продуктов в нашем</summary>
+    public enum GoodType
+    {
+        CheeseCake = 0,
+        CoffeBean = 1,
+    }
+    #endregion
+
+    #region variables
+    public static CoreGame Instance;
+
 
     /// <summary>дней</summary>
     public float GameTime;
@@ -64,8 +74,8 @@ public class CoreGame : MonoBehaviour
         {
             var item = new BarCustomer(i)
             {
-                start = i*5f,
-                finish = i*5f + 10f
+                start = i * 5f,
+                finish = i * 5f + 10f
             };
             customerList.Add(item);
 
@@ -92,6 +102,19 @@ public class CoreGame : MonoBehaviour
 
         return null;
     }
+
+    public bool ClickItem(GoodType itemType)
+    {
+        foreach (var item in customerList)
+            if (item.IsOnline)
+            {
+                item.finish = Mathf.Min(GameTime + 0.5f, item.finish);
+                break;
+            }
+
+        return true;
+    }
+
     #endregion
 
     public class BarCustomer

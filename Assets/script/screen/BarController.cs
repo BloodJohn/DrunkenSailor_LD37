@@ -14,9 +14,7 @@ public class BarController : MonoBehaviour
 
     /// <summary>места для посадки клиентов</summary>
     public BarstoolController[] clientList;
-    
-    /// <summary>префаб выбранного ингридиента</summary>
-    public GameObject itemClick;
+
     #endregion
 
     #region unity
@@ -47,8 +45,8 @@ public class BarController : MonoBehaviour
             var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
             if (hit.transform != null)
             {
-                if (hit.transform.name.Contains("mediumCoffe")) MediumCoffeClick(hit.point);
-                else if (hit.transform.name.Contains("cheeseCake")) CheeseCakeClick(hit.point);
+                var itemButton = hit.transform.gameObject.GetComponent<ItemButton>();
+                if (itemButton != null) CheeseCakeClick(hit.point, itemButton);
 
             }
         }
@@ -56,12 +54,6 @@ public class BarController : MonoBehaviour
         CoreGame.Instance.TurnTime(Time.deltaTime);
 
         ShowStats();
-    }
-
-    public void WinterClick()
-    {
-        CoreGame.Instance.Save();
-        //SceneManager.LoadScene(AutumnController.sceneName);
     }
 
     public void RestartClick()
@@ -95,15 +87,17 @@ public class BarController : MonoBehaviour
     }
 
 
-    private void CheeseCakeClick(Vector2 point)
+    private void CheeseCakeClick(Vector2 point, ItemButton clickItem)
     {
         Debug.LogFormat("CheeseCakeClick [{0},{1}]", point.x, point.y);
+        var result = CoreGame.Instance.ClickItem(clickItem.ItemType);
 
-        var prefab = itemClick;
-
-        var item = (GameObject)Instantiate(prefab, transform);
-        item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
-        Destroy(item, 3f);
+        if (result)
+        {
+            var item = (GameObject) Instantiate(clickItem.ItemPrefab, transform);
+            item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
+            Destroy(item, 3f);
+        }
     }
 
     /*private void CreateSheep()
