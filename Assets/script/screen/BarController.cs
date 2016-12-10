@@ -14,7 +14,7 @@ public class BarController : MonoBehaviour
     /// <summary>префаб "клиента"</summary>
     public GameObject sheepPrefab;
     /// <summary>префаб выбранного ингридиента</summary>
-    public GameObject haylagePrefab;
+    public GameObject itemClick;
     #endregion
 
     #region unity
@@ -46,6 +46,8 @@ public class BarController : MonoBehaviour
             if (hit.transform != null)
             {
                 if (hit.transform.name.Contains("mediumCoffe")) MediumCoffeClick(hit.point);
+                else if (hit.transform.name.Contains("cheeseCake")) CheeseCakeClick(hit.point);
+
             }
         }
     }
@@ -81,6 +83,18 @@ public class BarController : MonoBehaviour
 
         var item = (GameObject)Instantiate(prefab, transform);
         item.transform.position = new Vector3(point.x, point.y, 0f);*/
+    }
+
+
+    private void CheeseCakeClick(Vector2 point)
+    {
+        Debug.LogFormat("CheeseCakeClick [{0},{1}]", point.x, point.y);
+
+        var prefab = itemClick;
+
+        var item = (GameObject)Instantiate(prefab, transform);
+        item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
+        Destroy(item, 3f);
     }
 
     private void CreateSheep()
