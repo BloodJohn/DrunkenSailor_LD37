@@ -28,6 +28,7 @@ public class CoreGame : MonoBehaviour
     public int ScoreCount;
 
     private List<BarCustomer> customerList = new List<BarCustomer>();
+    private static List<BarCustomer> oldCustomerList = new List<BarCustomer>();
     #endregion
 
     #region function
@@ -78,34 +79,12 @@ public class CoreGame : MonoBehaviour
         customerList.Clear();
 
         for (int i = 0; i < 5; i++)
-        {
-            var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.CoffeBean+1);
-
-            var item = new BarCustomer(i, (GoodType)wantItem)
-            {
-                start = i * 5f,
-                finish = i * 5f + 10f
-            };
-            customerList.Add(item);
-
-        }
+            AddNewCustomer(i*5f);
     }
 
     public void TurnTime(float delta)
     {
         GameTime += delta;
-    }
-
-    public BarCustomer GetCustomer(int index)
-    {
-        foreach (var item in customerList)
-            if (item.index == index)
-            {
-                if (item.IsOnline) return item;
-                if (item.isView) return item;
-            }
-
-        return null;
     }
 
     /// <summary>взять вкусняшку и искать покупателя</summary>
@@ -130,6 +109,74 @@ public class CoreGame : MonoBehaviour
 
     #endregion
 
+    #region Customer generator
+
+    /// <summary>берем покупателя, который сейчас в баре</summary>
+    public BarCustomer GetCustomer(int index)
+    {
+        foreach (var item in customerList)
+            if (item.index == index)
+            {
+                if (item.IsOnline) return item;
+                if (item.isView) return item;
+            }
+
+        return null;
+    }
+
+    /// <summary>удаляет из очереди неактуальных покупателей</summary>
+    public void CollectOldCustomers()
+    {
+        oldCustomerList.Clear();
+
+        foreach (var item in customerList)
+            if (!item.isView && item.finish > GameTime)
+                oldCustomerList.Add(item);
+
+        if (oldCustomerList.Count<=0) return;
+
+        foreach (var oldItem in oldCustomerList)
+            customerList.Remove(oldItem);
+    }
+
+    /// <summary>добавляет нового покупателя в очередь</summary>
+    public bool AddNewCustomer(float time)
+    {
+        var startIndex = Random.Range(0, 5);
+
+        for (int i = 0; i < 5; i++)
+        {
+            var lastFinish = GetLastCustomer(startIndex);
+
+            if (lastFinish < time)
+            {
+                var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.CoffeBean + 1);
+
+                var item = new BarCustomer(startIndex, time, (GoodType) wantItem);
+                customerList.Add(item);
+                return true;
+            }
+            else
+            {
+                startIndex++;
+                if (startIndex >= 5) startIndex = 0;
+            }
+        }
+        
+        return false;
+    }
+
+    private float GetLastCustomer(int index)
+    {
+        var result = float.MinValue;
+
+        foreach (var customer in customerList)
+            if (customer.index == index && customer.finish > result)
+                result = customer.finish;
+
+        return result;
+    }
+
     /// <summary>модель посетителя в баре</summary>
     public class BarCustomer
     {
@@ -140,11 +187,11 @@ public class CoreGame : MonoBehaviour
         public float start;
         public float finish;
 
-        public BarCustomer(int number, GoodType want)
+        public BarCustomer(int number, float time, GoodType want)
         {
             index = number;
             wantItem = want;
-            start = CoreGame.Instance.GameTime;
+            start = time;
             finish = start + 10f;
             isView = false;
             isSatisfied = false;
@@ -170,4 +217,6 @@ public class CoreGame : MonoBehaviour
             isView = IsOnline;
         }
     }
+
+    #endregion
 }
