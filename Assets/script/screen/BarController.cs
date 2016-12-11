@@ -8,8 +8,12 @@ public class BarController : MonoBehaviour
     #region variables
     public const string sceneName = "bar";
 
-    /// <summary>Баристо оттдыхает</summary>
+    /// <summary>Баристо за стойкой Gameplay</summary>
+    public GameObject BaristoWork;
+    /// <summary>Баристо оттдыхает Win</summary>
     public GameObject BaristoRelax;
+    /// <summary>Баристо грустит Lose</summary>
+    public GameObject BaristoDepressed;
     /// <summary>места для посадки клиентов</summary>
     public BarstoolController[] СlientList;
     /// <summary>Список всех спрайтов</summary>
@@ -26,24 +30,29 @@ public class BarController : MonoBehaviour
         CoreGame.Instance.StartBar();
 
         ShowStats();
-
-        //for (var i = 0; i < CoreGame.Instance.SheepCount; i++) CreateSheep();
-
-        //longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
-    }
-
-    void Start()
-    {
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
-        //if (CoreGame.Instance.DayCount <= 0) return;
 
         if (CoreGame.Instance.GameWin)
         {
             BaristoRelax.SetActive(true);
+            BaristoDepressed.SetActive(false);
+            BaristoWork.SetActive(false);
+
+            foreach (var client in СlientList) client.Hide();
+
+            if (Input.GetMouseButtonDown(0)) RestartClick();
+        }
+        else if (CoreGame.Instance.GameLose)
+        {
+            BaristoDepressed.SetActive(true);
+            BaristoRelax.SetActive(false);
+            BaristoWork.SetActive(false);
+
+            foreach (var client in СlientList) client.Hide();
 
             if (Input.GetMouseButtonDown(0)) RestartClick();
         }
@@ -64,7 +73,9 @@ public class BarController : MonoBehaviour
             CoreGame.Instance.TurnTime(Time.deltaTime);
             ShowStats();
 
+            BaristoWork.SetActive(true);
             BaristoRelax.SetActive(false);
+            BaristoDepressed.SetActive(false);
         }
     }
 

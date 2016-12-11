@@ -48,11 +48,7 @@ public class CoreGame : MonoBehaviour
     private List<BarCustomer> customerList = new List<BarCustomer>();
     private static List<BarCustomer> oldCustomerList = new List<BarCustomer>();
     #endregion
-
-    #region function
-
-    #endregion
-
+    
     #region constructor
     void Awake()
     {
@@ -64,7 +60,7 @@ public class CoreGame : MonoBehaviour
     {
         GameTime = 0f;
         ScoreCount = 0;
-        LiveCount = 10;
+        LiveCount = 3;
         SceneManager.LoadScene(BarController.sceneName);
         Random.InitState(DateTime.Now.Second);
     }
@@ -96,8 +92,24 @@ public class CoreGame : MonoBehaviour
     {
         customerList.Clear();
 
-        for (int i = 0; i < 10; i++)
-            AddNewCustomer(i * 3f);
+        var time = 0f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            AddNewCustomer(time, 10f);
+            time += 3f;
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            AddNewCustomer(time, 7f);
+            time += 2f;
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            AddNewCustomer(time, 5f);
+            time += 1.5f;
+        }
     }
 
     public void TurnTime(float delta)
@@ -160,7 +172,7 @@ public class CoreGame : MonoBehaviour
 
 
     /// <summary>добавляет нового покупателя в очередь</summary>
-    private bool AddNewCustomer(float time)
+    private BarCustomer AddNewCustomer(float time, float delay)
     {
         CollectOldCustomers();
         var startIndex = Random.Range(0, 5);
@@ -173,9 +185,9 @@ public class CoreGame : MonoBehaviour
             {
                 var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.MaxCount);
 
-                var item = new BarCustomer(startIndex, time, (GoodType)wantItem);
+                var item = new BarCustomer(startIndex, time, delay, (GoodType)wantItem);
                 customerList.Add(item);
-                return true;
+                return item;
             }
             else
             {
@@ -184,7 +196,7 @@ public class CoreGame : MonoBehaviour
             }
         }
 
-        return false;
+        return null;
     }
 
     /// <summary>удаляет из очереди неактуальных покупателей</summary>
@@ -224,12 +236,12 @@ public class CoreGame : MonoBehaviour
         public float start;
         public float finish;
 
-        public BarCustomer(int number, float time, GoodType want)
+        public BarCustomer(int number, float time, float delay, GoodType want)
         {
             index = number;
             wantItem = want;
             start = time;
-            finish = start + 10f;
+            finish = start + delay;
             isView = false;
             isSatisfied = false;
         }

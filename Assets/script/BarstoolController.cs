@@ -28,4 +28,10 @@ public class BarstoolController : MonoBehaviour
             wantItem.GetComponentInChildren<SpriteRenderer>().sprite = parent.GoodSprite[(int) item.wantItem];
         }
     }
+
+    public void Hide()
+    {
+        wantItem.SetActive(false);
+        lumberman.SetActive(false);
+    }
 }
