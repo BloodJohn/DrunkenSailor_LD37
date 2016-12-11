@@ -8,6 +8,8 @@ public class BarController : MonoBehaviour
     #region variables
     public const string sceneName = "bar";
 
+    /// <summary>Баристо оттдыхает</summary>
+    public GameObject BaristoRelax;
     /// <summary>места для посадки клиентов</summary>
     public BarstoolController[] СlientList;
     /// <summary>Список всех спрайтов</summary>
@@ -39,21 +41,31 @@ public class BarController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
         //if (CoreGame.Instance.DayCount <= 0) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (CoreGame.Instance.GameWin)
         {
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
-            if (hit.transform != null)
-            {
-                var itemButton = hit.transform.gameObject.GetComponent<ItemButton>();
-                if (itemButton != null) CheeseCakeClick(hit.point, itemButton);
+            BaristoRelax.SetActive(true);
 
-            }
+            if (Input.GetMouseButtonDown(0)) RestartClick();
         }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+                if (hit.transform != null)
+                {
+                    var itemButton = hit.transform.gameObject.GetComponent<ItemButton>();
+                    if (itemButton != null) CheeseCakeClick(hit.point, itemButton);
 
-        CoreGame.Instance.TurnTime(Time.deltaTime);
+                }
+            }
 
-        ShowStats();
+            CoreGame.Instance.TurnTime(Time.deltaTime);
+            ShowStats();
+
+            BaristoRelax.SetActive(false);
+        }
     }
 
     public void RestartClick()
