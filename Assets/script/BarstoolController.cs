@@ -6,7 +6,7 @@ public class BarstoolController : MonoBehaviour
     public GameObject lumberman;
     public GameObject wantItem;
 
-    public void ShowState()
+    public void ShowState(BarController parent)
     {
         var item = CoreGame.Instance.GetCustomer(index);
 
@@ -22,5 +22,10 @@ public class BarstoolController : MonoBehaviour
         }
 
         wantItem.SetActive(lumberman.activeSelf);
+
+        if (wantItem.activeSelf)
+        {
+            wantItem.GetComponentInChildren<SpriteRenderer>().sprite = parent.GoodSprite[(int) item.wantItem];
+        }
     }
 }

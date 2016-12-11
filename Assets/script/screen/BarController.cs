@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class BarController : MonoBehaviour
 {
@@ -26,7 +25,6 @@ public class BarController : MonoBehaviour
 
         ShowStats();
 
-        Random.InitState(DateTime.Now.Second);
         //for (var i = 0; i < CoreGame.Instance.SheepCount; i++) CreateSheep();
 
         //longhouseButton.GetComponentInChildren<Text>().text = LanguageManager.Instance.GetTextValue("winter_button");
@@ -70,7 +68,7 @@ public class BarController : MonoBehaviour
         if (CoreGame.Instance==null) return;
 
         for (var i = 0; i < СlientList.Length; i++)
-            СlientList[i].ShowState();
+            СlientList[i].ShowState(this);
 
         LiveText.text = string.Format("{0}/{1}",CoreGame.Instance.ScoreCount, CoreGame.Instance.LiveCount);
     }

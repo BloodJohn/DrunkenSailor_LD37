@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class CoreGame : MonoBehaviour
 {
@@ -45,6 +47,7 @@ public class CoreGame : MonoBehaviour
         ScoreCount = 0;
         LiveCount = 10;
         SceneManager.LoadScene(BarController.sceneName);
+        Random.InitState(DateTime.Now.Second);
     }
 
     public void Save()
@@ -76,7 +79,9 @@ public class CoreGame : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            var item = new BarCustomer(i, GoodType.CheeseCake)
+            var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.CoffeBean+1);
+
+            var item = new BarCustomer(i, (GoodType)wantItem)
             {
                 start = i * 5f,
                 finish = i * 5f + 10f
@@ -89,11 +94,6 @@ public class CoreGame : MonoBehaviour
     public void TurnTime(float delta)
     {
         GameTime += delta;
-    }
-
-    public int HaylageBar()
-    {
-        return 0;
     }
 
     public BarCustomer GetCustomer(int index)
