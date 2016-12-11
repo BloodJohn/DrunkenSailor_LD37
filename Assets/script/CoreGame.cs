@@ -13,7 +13,25 @@ public class CoreGame : MonoBehaviour
     public enum GoodType
     {
         CheeseCake = 0,
-        CoffeBean = 1,
+        CoffeBean1 = 1,
+        CoffeBean2 = 2,
+        CoffeBean3 = 3,
+        CoffeBean4 = 4,
+        Syrup1 = 5,
+        Syrup2 = 6,
+        Syrup3 = 7,
+        Syrup4 = 8,
+        Syrup5 = 9,
+        Croissant = 10,
+        Cupcake1 = 11,
+        Cupcake2 = 12,
+        Macaroon1 = 13,
+        Macaroon2 = 14,
+        Macaroon3 = 15,
+        Macaroon4 = 16,
+        Macaroon5 = 17,
+        Sandwich = 18,
+        MaxCount = 19
     }
     #endregion
 
@@ -78,8 +96,8 @@ public class CoreGame : MonoBehaviour
     {
         customerList.Clear();
 
-        for (int i = 0; i < 5; i++)
-            AddNewCustomer(i*5f);
+        for (int i = 0; i < 10; i++)
+            AddNewCustomer(i * 3f);
     }
 
     public void TurnTime(float delta)
@@ -90,7 +108,7 @@ public class CoreGame : MonoBehaviour
     /// <summary>взять вкусняшку и искать покупателя</summary>
     public bool ClickItem(GoodType itemType)
     {
-        var findCustomer=false;
+        var findCustomer = false;
 
         foreach (var item in customerList)
             if (item.isView && !item.isSatisfied && item.wantItem == itemType)
@@ -105,6 +123,22 @@ public class CoreGame : MonoBehaviour
         if (!findCustomer) LiveCount--;
 
         return true;
+    }
+
+    /// <summary>слишком много ошибок!</summary>
+    public bool GameLose { get { return LiveCount <= 0; } }
+
+    /// <summary>Все клиенты ушли</summary>
+    public bool GameWin
+    {
+        get
+        {
+            foreach (var customer in customerList)
+                if (customer.finish >= GameTime)
+                    return false;
+
+            return true;
+        }
     }
 
     #endregion
@@ -124,35 +158,22 @@ public class CoreGame : MonoBehaviour
         return null;
     }
 
-    /// <summary>удаляет из очереди неактуальных покупателей</summary>
-    public void CollectOldCustomers()
-    {
-        oldCustomerList.Clear();
-
-        foreach (var item in customerList)
-            if (!item.isView && item.finish > GameTime)
-                oldCustomerList.Add(item);
-
-        if (oldCustomerList.Count<=0) return;
-
-        foreach (var oldItem in oldCustomerList)
-            customerList.Remove(oldItem);
-    }
 
     /// <summary>добавляет нового покупателя в очередь</summary>
-    public bool AddNewCustomer(float time)
+    private bool AddNewCustomer(float time)
     {
+        CollectOldCustomers();
         var startIndex = Random.Range(0, 5);
 
         for (int i = 0; i < 5; i++)
         {
-            var lastFinish = GetLastCustomer(startIndex);
+            var lastFinish = GetLastCustomer(startIndex) + 1f;
 
             if (lastFinish < time)
             {
-                var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.CoffeBean + 1);
+                var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.MaxCount);
 
-                var item = new BarCustomer(startIndex, time, (GoodType) wantItem);
+                var item = new BarCustomer(startIndex, time, (GoodType)wantItem);
                 customerList.Add(item);
                 return true;
             }
@@ -162,10 +183,26 @@ public class CoreGame : MonoBehaviour
                 if (startIndex >= 5) startIndex = 0;
             }
         }
-        
+
         return false;
     }
 
+    /// <summary>удаляет из очереди неактуальных покупателей</summary>
+    private void CollectOldCustomers()
+    {
+        oldCustomerList.Clear();
+
+        foreach (var item in customerList)
+            if (!item.isView && item.finish < GameTime)
+                oldCustomerList.Add(item);
+
+        if (oldCustomerList.Count <= 0) return;
+
+        foreach (var oldItem in oldCustomerList)
+            customerList.Remove(oldItem);
+    }
+
+    /// <summary>ищет последнего покупателя на этом стуле</summary>
     private float GetLastCustomer(int index)
     {
         var result = float.MinValue;
