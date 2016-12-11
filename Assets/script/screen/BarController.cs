@@ -10,13 +10,13 @@ public class BarController : MonoBehaviour
     public const string sceneName = "bar";
 
     /// <summary>места для посадки клиентов</summary>
-    public BarstoolController[] clientList;
+    public BarstoolController[] СlientList;
     /// <summary>Список всех спрайтов</summary>
     public Sprite[] GoodSprite;
     /// <summary>Анимация товара при клике</summary>
     public GameObject ItemPrefab;
 
-    public Text liveText;
+    public Text LiveText;
     #endregion
 
     #region unity
@@ -69,15 +69,14 @@ public class BarController : MonoBehaviour
     {
         if (CoreGame.Instance==null) return;
 
-        for (var i = 0; i < clientList.Length; i++)
-            clientList[i].ShowState();
+        for (var i = 0; i < СlientList.Length; i++)
+            СlientList[i].ShowState();
 
-        liveText.text = string.Format("{0}/{1}",CoreGame.Instance.ScoreCount, CoreGame.Instance.LiveCount);
+        LiveText.text = string.Format("{0}/{1}",CoreGame.Instance.ScoreCount, CoreGame.Instance.LiveCount);
     }
 
     private void CheeseCakeClick(Vector2 point, ItemButton clickItem)
     {
-        Debug.LogFormat("CheeseCakeClick [{0},{1}]", point.x, point.y);
         var result = CoreGame.Instance.ClickItem(clickItem.ItemType);
 
         if (result)
@@ -88,30 +87,6 @@ public class BarController : MonoBehaviour
             Destroy(item, 3f);
         }
     }
-
-    /*private void CreateSheep()
-    {
-        var cnt = 0;
-        var height = Camera.allCameras[0].orthographicSize;
-        var width = height * Camera.allCameras[0].aspect * height;
-
-        while (cnt < 100)
-        {
-            cnt++;
-            var point = new Vector2(Random.Range(-width, width), Random.Range(-height, height));
-
-            var hit = Physics2D.Raycast(point, Vector2.zero);
-            if (hit.transform != null)
-            {
-                if (hit.transform.name.Contains("land"))
-                {
-                    var item = (GameObject)Instantiate(lumbermanPrefab, transform);
-                    item.transform.position = new Vector3(point.x, point.y, 0f);
-                    return;
-                }
-            }
-        }
-    }*/
     #endregion
 
     #region achievements

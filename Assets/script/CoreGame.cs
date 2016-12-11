@@ -76,7 +76,7 @@ public class CoreGame : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            var item = new BarCustomer(i)
+            var item = new BarCustomer(i, GoodType.CheeseCake)
             {
                 start = i * 5f,
                 finish = i * 5f + 10f
@@ -108,33 +108,42 @@ public class CoreGame : MonoBehaviour
         return null;
     }
 
+    /// <summary>взять вкусняшку и искать покупателя</summary>
     public bool ClickItem(GoodType itemType)
     {
+        var findCustomer=false;
+
         foreach (var item in customerList)
-            if (item.isView && !item.isSatisfied)
+            if (item.isView && !item.isSatisfied && item.wantItem == itemType)
             {
                 item.finish = Mathf.Min(GameTime + 0.5f, item.finish);
                 item.isSatisfied = true;
                 ScoreCount++;
+                findCustomer = true;
                 break;
             }
+
+        if (!findCustomer) LiveCount--;
 
         return true;
     }
 
     #endregion
 
+    /// <summary>модель посетителя в баре</summary>
     public class BarCustomer
     {
         public bool isView;
         public bool isSatisfied;
         public int index;
+        public GoodType wantItem;
         public float start;
         public float finish;
 
-        public BarCustomer(int number)
+        public BarCustomer(int number, GoodType want)
         {
             index = number;
+            wantItem = want;
             start = CoreGame.Instance.GameTime;
             finish = start + 10f;
             isView = false;
