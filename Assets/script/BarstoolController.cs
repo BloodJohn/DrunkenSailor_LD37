@@ -2,11 +2,10 @@
 
 public class BarstoolController : MonoBehaviour
 {
+    private int oldIndex = -1;
     public int index;
     public GameObject lumberman;
     public GameObject wantItem;
-    public GameObject lumbermanTop;
-    public GameObject lumbermanBottom;
 
     public void ShowState(BarController parent)
     {
@@ -18,6 +17,8 @@ public class BarstoolController : MonoBehaviour
         }
         else
         {
+            ChangeCustormer(parent, item);
+
             //включаем или отключаем показ дровосека
             lumberman.SetActive(item.IsOnline);
             item.UpdateStatus();
@@ -29,6 +30,19 @@ public class BarstoolController : MonoBehaviour
         {
             wantItem.GetComponentInChildren<SpriteRenderer>().sprite = parent.GoodSprite[(int) item.wantItem];
         }
+    }
+
+    private void ChangeCustormer(BarController parent, CoreGame.BarCustomer item)
+    {
+        if (oldIndex == index) return;
+        
+        if (lumberman != null) Destroy(lumberman);
+
+        var prefab = parent.CustomerPrefab[(int) item.visitorItem];
+
+        lumberman = Instantiate(prefab);
+        lumberman.transform.parent = transform;
+        lumberman.transform.localPosition = Vector3.zero;
     }
 
     public void Hide()

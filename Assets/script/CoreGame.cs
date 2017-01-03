@@ -195,8 +195,9 @@ public class CoreGame : MonoBehaviour
             if (lastFinish < time)
             {
                 var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.MaxCount);
+                var visitorItem = Random.Range((int)CustomerType.LumberJack1, (int)CustomerType.MaxCount);
 
-                var item = new BarCustomer(startIndex, time, delay, (GoodType)wantItem, CustomerType.LumberJack1);
+                var item = new BarCustomer(startIndex, time, delay, (GoodType)wantItem, (CustomerType)visitorItem);
                 customerList.Add(item);
                 return item;
             }

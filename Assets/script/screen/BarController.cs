@@ -16,8 +16,10 @@ public class BarController : MonoBehaviour
     public GameObject BaristoDepressed;
     /// <summary>места для посадки клиентов</summary>
     public BarstoolController[] СlientList;
-    /// <summary>Список всех спрайтов</summary>
+    /// <summary>Список всех спрайтов товаров</summary>
     public Sprite[] GoodSprite;
+    /// <summary>Список всех префабов клиентов</summary>
+    public GameObject[] CustomerPrefab;
     /// <summary>Анимация товара при клике</summary>
     public GameObject ItemPrefab;
 
