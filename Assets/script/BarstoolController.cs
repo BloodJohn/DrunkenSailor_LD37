@@ -5,6 +5,8 @@ public class BarstoolController : MonoBehaviour
     public int index;
     public GameObject lumberman;
     public GameObject wantItem;
+    public GameObject lumbermanTop;
+    public GameObject lumbermanBottom;
 
     public void ShowState(BarController parent)
     {

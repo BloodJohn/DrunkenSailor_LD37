@@ -33,6 +33,17 @@ public class CoreGame : MonoBehaviour
         Sandwich = 18,
         MaxCount = 19
     }
+
+    public enum CustomerType
+    {
+        LumberJack1 = 0,
+        LumberJack2 = 1,
+        LumberJack3 = 2,
+        girl1 = 3,
+        girl2 = 4,
+        MaxCount = 5
+    }
+
     #endregion
 
     #region variables
@@ -94,18 +105,18 @@ public class CoreGame : MonoBehaviour
 
         var time = 0f;
 
-        for (int i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             AddNewCustomer(time, 10f);
             time += 3f;
         }
-        for (int i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             AddNewCustomer(time, 7f);
             time += 2f;
         }
 
-        for (int i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             AddNewCustomer(time, 5f);
             time += 1.5f;
@@ -177,7 +188,7 @@ public class CoreGame : MonoBehaviour
         CollectOldCustomers();
         var startIndex = Random.Range(0, 5);
 
-        for (int i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             var lastFinish = GetLastCustomer(startIndex) + 1f;
 
@@ -185,7 +196,7 @@ public class CoreGame : MonoBehaviour
             {
                 var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.MaxCount);
 
-                var item = new BarCustomer(startIndex, time, delay, (GoodType)wantItem);
+                var item = new BarCustomer(startIndex, time, delay, (GoodType)wantItem, CustomerType.LumberJack1);
                 customerList.Add(item);
                 return item;
             }
@@ -235,8 +246,9 @@ public class CoreGame : MonoBehaviour
         public GoodType wantItem;
         public float start;
         public float finish;
+        public CustomerType visitorItem;
 
-        public BarCustomer(int number, float time, float delay, GoodType want)
+        public BarCustomer(int number, float time, float delay, GoodType want, CustomerType visitor)
         {
             index = number;
             wantItem = want;
@@ -244,6 +256,7 @@ public class CoreGame : MonoBehaviour
             finish = start + delay;
             isView = false;
             isSatisfied = false;
+            visitorItem = visitor;
         }
 
         public bool IsOnline
