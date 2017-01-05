@@ -153,7 +153,7 @@ public class CoreGame : MonoBehaviour
 
         if (!findCustomer) LiveCount--;
 
-        return true;
+        return findCustomer;
     }
 
     /// <summary>слишком много ошибок!</summary>

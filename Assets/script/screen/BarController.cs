@@ -18,6 +18,7 @@ public class BarController : MonoBehaviour
     public BarstoolController[] СlientList;
     /// <summary>Список всех спрайтов товаров</summary>
     public Sprite[] GoodSprite;
+    public Sprite VrongSprite;
     /// <summary>Список всех префабов клиентов</summary>
     public GameObject[] CustomerPrefab;
     /// <summary>Анимация товара при клике</summary>
@@ -122,6 +123,13 @@ public class BarController : MonoBehaviour
             var item = (GameObject) Instantiate(ItemPrefab, transform);
             item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
             item.GetComponentInChildren<SpriteRenderer>().sprite = GoodSprite[(int) clickItem.ItemType];
+            Destroy(item, 3f);
+        }
+        else
+        {
+            var item = (GameObject)Instantiate(ItemPrefab, transform);
+            item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
+            item.GetComponentInChildren<SpriteRenderer>().sprite = VrongSprite;
             Destroy(item, 3f);
         }
     }
