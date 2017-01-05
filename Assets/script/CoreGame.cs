@@ -116,11 +116,19 @@ public class CoreGame : MonoBehaviour
             time += 2f;
         }
 
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < 10; i++)
         {
             AddNewCustomer(time, 5f);
             time += 1.5f;
         }
+
+        for (var i = 0; i < 10; i++)
+        {
+            AddNewCustomer(time, 3f);
+            time += 1f;
+        }
+
+        Debug.LogFormat("Последний посетитель: {0}", time);
     }
 
     public void TurnTime(float delta)
@@ -188,16 +196,35 @@ public class CoreGame : MonoBehaviour
         CollectOldCustomers();
         var startIndex = Random.Range(0, 5);
 
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++) //пять раз пробуем пристроить нашего посетителя
         {
             var lastFinish = GetLastCustomer(startIndex) + 1f;
 
             if (lastFinish < time)
             {
-                var wantItem = Random.Range((int)GoodType.CheeseCake, (int)GoodType.MaxCount);
-                var visitorItem = Random.Range((int)CustomerType.LumberJack1, (int)CustomerType.MaxCount);
+                var wantItem = (GoodType)Random.Range((int)GoodType.CheeseCake, (int)GoodType.MaxCount);
+                var visitorItem = (CustomerType)Random.Range((int)CustomerType.LumberJack1, (int)CustomerType.MaxCount);
 
-                var item = new BarCustomer(startIndex, time, delay, (GoodType)wantItem, (CustomerType)visitorItem);
+                switch (visitorItem)
+                {
+                    case CustomerType.LumberJack1: //хипстер
+                        break;
+                    case CustomerType.LumberJack2: //мужик с топором
+                        if (delay > 7f) visitorItem = CustomerType.LumberJack1;
+                        break;
+                    case CustomerType.LumberJack3: //мужик в шортах
+                        if (delay > 3f) visitorItem = CustomerType.LumberJack1;
+                        break;
+                    case CustomerType.girl1: //девчонка в шортах
+                        if (delay > 7f) visitorItem = CustomerType.LumberJack1;
+                        break;
+                    case CustomerType.girl2: //девчонка в очках и рубашке
+                        if (delay > 5f) visitorItem = CustomerType.girl1;
+                        break;
+                }
+
+
+                var item = new BarCustomer(startIndex, time, delay, wantItem, visitorItem);
                 customerList.Add(item);
                 return item;
             }
@@ -207,6 +234,8 @@ public class CoreGame : MonoBehaviour
                 if (startIndex >= 5) startIndex = 0;
             }
         }
+
+        Debug.Log("Нет свободных стульев!");
 
         return null;
     }

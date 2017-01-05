@@ -23,6 +23,13 @@ public class BarController : MonoBehaviour
     /// <summary>Анимация товара при клике</summary>
     public GameObject ItemPrefab;
 
+
+    /// <summary>жизни</summary>
+    public GameObject[] liveList;
+    /// <summary>потерянные жизни</summary>
+    public GameObject[] liveoffList;
+
+    /// <summary>счетчик клиентов</summary>
     public Text LiveText;
     #endregion
 
@@ -95,7 +102,15 @@ public class BarController : MonoBehaviour
         for (var i = 0; i < СlientList.Length; i++)
             СlientList[i].ShowState(this);
 
-        LiveText.text = string.Format("{0}/{1}",CoreGame.Instance.ScoreCount, CoreGame.Instance.LiveCount);
+        LiveText.text = string.Format("{0}",CoreGame.Instance.ScoreCount);
+
+        for (var i = 0; i < liveList.Length; i++)
+        {
+            var fullLive = CoreGame.Instance.LiveCount > i;
+
+            liveList[i].SetActive(fullLive);
+            liveoffList[i].SetActive(!fullLive);
+        }
     }
 
     private void CheeseCakeClick(Vector2 point, ItemButton clickItem)
