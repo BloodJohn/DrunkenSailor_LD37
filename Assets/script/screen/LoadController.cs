@@ -39,7 +39,7 @@ public class LoadController : MonoBehaviour
     private void GooglePlayServices()
     {
 #if UNITY_ANDROID
-        Debug.LogFormat("GooglePlayServices");
+        /*Debug.LogFormat("GooglePlayServices");
         var config = new PlayGamesClientConfiguration.Builder()
         // enables saving game progress.
         //.EnableSavedGames()
@@ -68,7 +68,7 @@ public class LoadController : MonoBehaviour
                 //пишем для отладки, потом надо убрать.
                 //author.text = "Social.localUser.Authenticate - failed";
             }
-        });
+        });*/
 #endif
     }
 }
