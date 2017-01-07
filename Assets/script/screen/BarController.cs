@@ -48,62 +48,51 @@ public class BarController : MonoBehaviour
 
         if (CoreGame.Instance.GameWin)
         {
-            BaristoRelax.SetActive(true);
-            BaristoDepressed.SetActive(false);
-            BaristoWork.SetActive(false);
-
-            foreach (var client in СlientList) client.Hide();
-
-            if (Input.GetMouseButtonDown(0)) RestartClick();
+            ShowWin();
+            WaitRestart();
         }
         else if (CoreGame.Instance.GameLose)
         {
-            BaristoDepressed.SetActive(true);
-            BaristoRelax.SetActive(false);
-            BaristoWork.SetActive(false);
-
-            foreach (var client in СlientList) client.Hide();
-
-            if (Input.GetMouseButtonDown(0)) RestartClick();
+            ShowLose();
+            WaitRestart();
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
-                if (hit.transform != null)
-                {
-                    var itemButton = hit.transform.gameObject.GetComponent<ItemButton>();
-                    if (itemButton != null) CheeseCakeClick(hit.point, itemButton);
 
+            if (Input.touchSupported)
+            {
+                foreach (var touch in Input.touches)
+                {
+                    if (touch.phase == TouchPhase.Began) //|| touch.phase == TouchPhase.Moved
+                    {
+                        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(touch.position);
+                        CheckMouseClick(mouseWorldPos);
+                    }   
+                }
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    CheckMouseClick(mouseWorldPos);
                 }
             }
 
-            CoreGame.Instance.TurnTime(Time.deltaTime);
-            ShowStats();
-
-            BaristoWork.SetActive(true);
-            BaristoRelax.SetActive(false);
-            BaristoDepressed.SetActive(false);
+            ShowGame();
         }
-    }
-
-    public void RestartClick()
-    {
-        CoreGame.Instance.RestartGame();
     }
     #endregion
 
     #region stuff
     private void ShowStats()
     {
-        if (CoreGame.Instance==null) return;
+        if (CoreGame.Instance == null) return;
 
         for (var i = 0; i < СlientList.Length; i++)
             СlientList[i].ShowState(this);
 
-        LiveText.text = string.Format("{0}",CoreGame.Instance.ScoreCount);
+        LiveText.text = string.Format("{0}", CoreGame.Instance.ScoreCount);
 
         for (var i = 0; i < liveList.Length; i++)
         {
@@ -120,9 +109,9 @@ public class BarController : MonoBehaviour
 
         if (result)
         {
-            var item = (GameObject) Instantiate(ItemPrefab, transform);
+            var item = (GameObject)Instantiate(ItemPrefab, transform);
             item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
-            item.GetComponentInChildren<SpriteRenderer>().sprite = GoodSprite[(int) clickItem.ItemType];
+            item.GetComponentInChildren<SpriteRenderer>().sprite = GoodSprite[(int)clickItem.ItemType];
             Destroy(item, 3f);
         }
         else
@@ -131,6 +120,60 @@ public class BarController : MonoBehaviour
             item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
             item.GetComponentInChildren<SpriteRenderer>().sprite = VrongSprite;
             Destroy(item, 3f);
+        }
+    }
+
+    private void ShowWin()
+    {
+        BaristoRelax.SetActive(true);
+        BaristoDepressed.SetActive(false);
+        BaristoWork.SetActive(false);
+
+        foreach (var client in СlientList) client.Hide();
+    }
+
+    private void ShowLose()
+    {
+        BaristoDepressed.SetActive(true);
+        BaristoRelax.SetActive(false);
+        BaristoWork.SetActive(false);
+
+        foreach (var client in СlientList) client.Hide();
+    }
+
+    private void ShowGame()
+    {
+        CoreGame.Instance.TurnTime(Time.deltaTime);
+        ShowStats();
+
+        BaristoWork.SetActive(true);
+        BaristoRelax.SetActive(false);
+        BaristoDepressed.SetActive(false);
+    }
+
+    private void WaitRestart()
+    {
+        if (Input.touchSupported)
+        {
+            foreach (var touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Ended) CoreGame.Instance.RestartGame();
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonUp(0)) CoreGame.Instance.RestartGame();
+        }
+    }
+
+    private void CheckMouseClick(Vector2 mouseWorldPos)
+    {
+        var hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+        if (hit.transform != null)
+        {
+            var itemButton = hit.transform.gameObject.GetComponent<ItemButton>();
+            if (itemButton != null) CheeseCakeClick(hit.point, itemButton);
+
         }
     }
     #endregion

@@ -105,24 +105,43 @@ public class CoreGame : MonoBehaviour
 
         var time = 0f;
 
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < 10; i++)
         {
             AddNewCustomer(time, 10f);
             time += 3f;
         }
-        for (var i = 0; i < 5; i++)
+
+        time += 2f;
+
+        for (var i = 0; i < 10; i++)
         {
             AddNewCustomer(time, 7f);
             time += 2f;
         }
 
-        for (var i = 0; i < 10; i++)
+        time += 3f;
+
+        for (var i = 0; i < 5; i++)
+        {
+            AddNewCustomer(time, 6f);
+            time += 2f;
+        }
+
+        for (var i = 0; i < 5; i++)
         {
             AddNewCustomer(time, 5f);
             time += 1.5f;
         }
 
-        for (var i = 0; i < 10; i++)
+        time += 3.5f;
+
+        for (var i = 0; i < 5; i++)
+        {
+            AddNewCustomer(time, 4f);
+            time += 1.5f;
+        }
+
+        for (var i = 0; i < 5; i++)
         {
             AddNewCustomer(time, 3f);
             time += 1f;
