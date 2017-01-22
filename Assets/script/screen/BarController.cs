@@ -1,5 +1,6 @@
 ﻿//using SmartLocalization;
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,9 @@ public class BarController : MonoBehaviour
 
     /// <summary>счетчик клиентов</summary>
     public Text LiveText;
+
+    private float _waitTime = float.MinValue;
+    private const float _maxWaitTime = 3f;
     #endregion
 
     #region unity
@@ -45,42 +49,46 @@ public class BarController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
-
+        if (_waitTime >= 0f)
+        {
+            _waitTime += Time.deltaTime;
+            if (_waitTime < _maxWaitTime) return;
+            WaitRestart();
+            return;
+        }
         if (CoreGame.Instance.GameWin)
         {
             ShowWin();
-            WaitRestart();
+            return;
         }
-        else if (CoreGame.Instance.GameLose)
+        if (CoreGame.Instance.GameLose)
         {
             ShowLose();
-            WaitRestart();
+            return;
         }
-        else
-        {
 
-            if (Input.touchSupported)
+        if (Input.touchSupported)
+        {
+            foreach (var touch in Input.touches)
             {
-                foreach (var touch in Input.touches)
+                if (touch.phase == TouchPhase.Began) //|| touch.phase == TouchPhase.Moved
                 {
-                    if (touch.phase == TouchPhase.Began) //|| touch.phase == TouchPhase.Moved
-                    {
-                        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(touch.position);
-                        CheckMouseClick(mouseWorldPos);
-                    }   
-                }
-            }
-            else
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(touch.position);
                     CheckMouseClick(mouseWorldPos);
                 }
             }
-
-            ShowGame();
         }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                CheckMouseClick(mouseWorldPos);
+            }
+        }
+
+        ShowGame();
+
     }
     #endregion
 
@@ -130,6 +138,7 @@ public class BarController : MonoBehaviour
         BaristoWork.SetActive(false);
 
         foreach (var client in СlientList) client.Hide();
+        _waitTime = 0f;
     }
 
     private void ShowLose()
@@ -139,6 +148,7 @@ public class BarController : MonoBehaviour
         BaristoWork.SetActive(false);
 
         foreach (var client in СlientList) client.Hide();
+        _waitTime = 0f;
     }
 
     private void ShowGame()
@@ -156,13 +166,13 @@ public class BarController : MonoBehaviour
         if (Input.touchSupported)
         {
             foreach (var touch in Input.touches)
-            {
-                if (touch.phase == TouchPhase.Ended) CoreGame.Instance.RestartGame();
-            }
+                if (touch.phase == TouchPhase.Began)
+                    CoreGame.Instance.RestartGame();
         }
         else
         {
-            if (Input.GetMouseButtonUp(0)) CoreGame.Instance.RestartGame();
+            if (Input.GetMouseButtonDown(0))
+                CoreGame.Instance.RestartGame();
         }
     }
 
