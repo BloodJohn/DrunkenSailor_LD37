@@ -39,8 +39,8 @@ public class CoreGame : MonoBehaviour
         LumberJack1 = 0,
         LumberJack2 = 1,
         LumberJack3 = 2,
-        girl1 = 3,
-        girl2 = 4,
+        Girl1 = 3,
+        Girl2 = 4,
         MaxCount = 5
     }
 
@@ -55,9 +55,13 @@ public class CoreGame : MonoBehaviour
     public int LiveCount;
     /// <summary>сколько довольных клиентов</summary>
     public int ScoreCount;
+    /// <summary>текущий уровень игры</summary>
+    public int LevelIndex;
 
-    private List<BarCustomer> customerList = new List<BarCustomer>();
-    private static List<BarCustomer> oldCustomerList = new List<BarCustomer>();
+    private List<BarCustomer> _customerList = new List<BarCustomer>();
+    private static List<BarCustomer> _oldCustomerList = new List<BarCustomer>();
+    /// <summary>Уровни</summary>
+    public LevelData[] Levels;
     #endregion
     
     #region constructor
@@ -101,53 +105,7 @@ public class CoreGame : MonoBehaviour
 
     public void StartBar()
     {
-        customerList.Clear();
-
-        var time = 0f;
-
-        for (var i = 0; i < 10; i++)
-        {
-            AddNewCustomer(time, 10f);
-            time += 3f;
-        }
-
-        time += 2f;
-
-        for (var i = 0; i < 10; i++)
-        {
-            AddNewCustomer(time, 7f);
-            time += 2f;
-        }
-
-        time += 3f;
-
-        for (var i = 0; i < 5; i++)
-        {
-            AddNewCustomer(time, 6f);
-            time += 2f;
-        }
-
-        for (var i = 0; i < 5; i++)
-        {
-            AddNewCustomer(time, 5f);
-            time += 1.5f;
-        }
-
-        time += 3.5f;
-
-        for (var i = 0; i < 5; i++)
-        {
-            AddNewCustomer(time, 4f);
-            time += 1.5f;
-        }
-
-        for (var i = 0; i < 5; i++)
-        {
-            AddNewCustomer(time, 3f);
-            time += 1f;
-        }
-
-        Debug.LogFormat("Последний посетитель: {0}", time);
+        LoadLevel(LevelIndex);
     }
 
     public void TurnTime(float delta)
@@ -160,11 +118,11 @@ public class CoreGame : MonoBehaviour
     {
         var findCustomer = false;
 
-        foreach (var item in customerList)
-            if (item.isView && !item.isSatisfied && item.wantItem == itemType)
+        foreach (var item in _customerList)
+            if (item.IsView && !item.IsSatisfied && item.WantItem == itemType)
             {
-                item.finish = Mathf.Min(GameTime + 0.5f, item.finish);
-                item.isSatisfied = true;
+                item.Finish = Mathf.Min(GameTime + 0.5f, item.Finish);
+                item.IsSatisfied = true;
                 ScoreCount++;
                 findCustomer = true;
                 break;
@@ -183,8 +141,8 @@ public class CoreGame : MonoBehaviour
     {
         get
         {
-            foreach (var customer in customerList)
-                if (customer.finish >= GameTime)
+            foreach (var customer in _customerList)
+                if (customer.Finish >= GameTime)
                     return false;
 
             return true;
@@ -198,19 +156,40 @@ public class CoreGame : MonoBehaviour
     /// <summary>берем покупателя, который сейчас в баре</summary>
     public BarCustomer GetCustomer(int index)
     {
-        foreach (var item in customerList)
-            if (item.index == index)
+        foreach (var item in _customerList)
+            if (item.Index == index)
             {
                 if (item.IsOnline) return item;
-                if (item.isView) return item;
+                if (item.IsView) return item;
             }
 
         return null;
     }
 
+    /// <summary>Создаем всех посетителей для указанного уровня</summary>
+    private void LoadLevel(int index)
+    {
+        var level = Levels[index];
+
+        _customerList.Clear();
+        var time = 0f;
+
+        foreach (var group in level.GroupList)
+        {
+             time += group.StartPause;
+
+            for (var i = 0; i < group.Quantity; i++)
+            {
+                AddNewCustomer(time, group.WaitTime);
+                time += group.NextTime;
+            }
+        }
+
+        Debug.LogFormat("Последний посетитель: {0}", time);
+    }
 
     /// <summary>добавляет нового покупателя в очередь</summary>
-    private BarCustomer AddNewCustomer(float time, float delay)
+    private BarCustomer AddNewCustomer(float time, float waitTime)
     {
         CollectOldCustomers();
         var startIndex = Random.Range(0, 5);
@@ -229,22 +208,22 @@ public class CoreGame : MonoBehaviour
                     case CustomerType.LumberJack1: //хипстер
                         break;
                     case CustomerType.LumberJack2: //мужик с топором
-                        if (delay > 7f) visitorItem = CustomerType.LumberJack1;
+                        if (waitTime > 7f) visitorItem = CustomerType.LumberJack1;
                         break;
                     case CustomerType.LumberJack3: //мужик в шортах
-                        if (delay > 3f) visitorItem = CustomerType.LumberJack1;
+                        if (waitTime > 3f) visitorItem = CustomerType.LumberJack1;
                         break;
-                    case CustomerType.girl1: //девчонка в шортах
-                        if (delay > 7f) visitorItem = CustomerType.LumberJack1;
+                    case CustomerType.Girl1: //девчонка в шортах
+                        if (waitTime > 7f) visitorItem = CustomerType.LumberJack1;
                         break;
-                    case CustomerType.girl2: //девчонка в очках и рубашке
-                        if (delay > 5f) visitorItem = CustomerType.girl1;
+                    case CustomerType.Girl2: //девчонка в очках и рубашке
+                        if (waitTime > 5f) visitorItem = CustomerType.Girl1;
                         break;
                 }
 
 
-                var item = new BarCustomer(startIndex, time, delay, wantItem, visitorItem);
-                customerList.Add(item);
+                var item = new BarCustomer(startIndex, time, waitTime, wantItem, visitorItem);
+                _customerList.Add(item);
                 return item;
             }
             else
@@ -262,16 +241,16 @@ public class CoreGame : MonoBehaviour
     /// <summary>удаляет из очереди неактуальных покупателей</summary>
     private void CollectOldCustomers()
     {
-        oldCustomerList.Clear();
+        _oldCustomerList.Clear();
 
-        foreach (var item in customerList)
-            if (!item.isView && item.finish < GameTime)
-                oldCustomerList.Add(item);
+        foreach (var item in _customerList)
+            if (!item.IsView && item.Finish < GameTime)
+                _oldCustomerList.Add(item);
 
-        if (oldCustomerList.Count <= 0) return;
+        if (_oldCustomerList.Count <= 0) return;
 
-        foreach (var oldItem in oldCustomerList)
-            customerList.Remove(oldItem);
+        foreach (var oldItem in _oldCustomerList)
+            _customerList.Remove(oldItem);
     }
 
     /// <summary>ищет последнего покупателя на этом стуле</summary>
@@ -279,9 +258,9 @@ public class CoreGame : MonoBehaviour
     {
         var result = float.MinValue;
 
-        foreach (var customer in customerList)
-            if (customer.index == index && customer.finish > result)
-                result = customer.finish;
+        foreach (var customer in _customerList)
+            if (customer.Index == index && customer.Finish > result)
+                result = customer.Finish;
 
         return result;
     }
@@ -289,23 +268,23 @@ public class CoreGame : MonoBehaviour
     /// <summary>модель посетителя в баре</summary>
     public class BarCustomer
     {
-        public bool isView;
-        public bool isSatisfied;
-        public int index;
-        public GoodType wantItem;
-        public float start;
-        public float finish;
-        public CustomerType visitorItem;
+        public bool IsView;
+        public bool IsSatisfied;
+        public int Index;
+        public GoodType WantItem;
+        public float Start;
+        public float Finish;
+        public CustomerType VisitorItem;
 
         public BarCustomer(int number, float time, float delay, GoodType want, CustomerType visitor)
         {
-            index = number;
-            wantItem = want;
-            start = time;
-            finish = start + delay;
-            isView = false;
-            isSatisfied = false;
-            visitorItem = visitor;
+            Index = number;
+            WantItem = want;
+            Start = time;
+            Finish = Start + delay;
+            IsView = false;
+            IsSatisfied = false;
+            VisitorItem = visitor;
         }
 
         public bool IsOnline
@@ -313,19 +292,35 @@ public class CoreGame : MonoBehaviour
             get
             {
                 var time = CoreGame.Instance.GameTime;
-                return time > start && time < finish;
+                return time > Start && time < Finish;
             }
         }
 
         public void UpdateStatus()
         {
             var newStatus = IsOnline;
-            if (newStatus == isView) return;
+            if (newStatus == IsView) return;
             //отнимаем очки если покупатель не дождался заказа
-            if (!newStatus && isView && !isSatisfied)
+            if (!newStatus && IsView && !IsSatisfied)
                 CoreGame.Instance.LiveCount--;
 
-            isView = IsOnline;
+            IsView = IsOnline;
+        }
+    }
+
+    [Serializable]
+    public struct LevelData
+    {
+        public string name;
+        public GroupData[] GroupList;
+
+        [Serializable]
+        public struct GroupData
+        {
+            public float StartPause;
+            public int Quantity;
+            public float WaitTime;
+            public float NextTime;
         }
     }
 

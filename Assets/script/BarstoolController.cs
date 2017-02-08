@@ -28,7 +28,7 @@ public class BarstoolController : MonoBehaviour
 
         if (wantItem.activeSelf)
         {
-            wantItem.GetComponentInChildren<SpriteRenderer>().sprite = parent.GoodSprite[(int) item.wantItem];
+            wantItem.GetComponentInChildren<SpriteRenderer>().sprite = parent.GoodSprite[(int) item.WantItem];
         }
     }
 
@@ -38,7 +38,7 @@ public class BarstoolController : MonoBehaviour
         
         if (lumberman != null) Destroy(lumberman);
 
-        var prefab = parent.CustomerPrefab[(int) item.visitorItem];
+        var prefab = parent.CustomerPrefab[(int) item.VisitorItem];
 
         lumberman = Instantiate(prefab);
         lumberman.transform.parent = transform;
