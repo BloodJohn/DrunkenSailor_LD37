@@ -62,8 +62,21 @@ public class CoreGame : MonoBehaviour
     private static List<BarCustomer> _oldCustomerList = new List<BarCustomer>();
     /// <summary>Уровни</summary>
     public LevelData[] Levels;
+    /// <summary>название текущего уровня</summary>
+    public string LevelName { get { return Levels[LevelIndex].name; } }
+    /// <summary>название следующего уровня</summary>
+    public string NextLevelName
+    {
+        get
+        {
+            if (LevelIndex+1 >= Levels.Length)
+                return Levels[Levels.Length-1].name;
+
+            return Levels[LevelIndex+1].name;
+        }
+    }
     #endregion
-    
+
     #region constructor
     void Awake()
     {
@@ -73,9 +86,6 @@ public class CoreGame : MonoBehaviour
 
     public void RestartGame()
     {
-        GameTime = 0f;
-        ScoreCount = 0;
-        LiveCount = 3;
         SceneManager.LoadScene(BarController.sceneName);
         Random.InitState(DateTime.Now.Second);
     }
@@ -105,6 +115,13 @@ public class CoreGame : MonoBehaviour
 
     public void StartBar()
     {
+        if (LevelIndex < 0) LevelIndex = 0;
+        if (LevelIndex >= Levels.Length) LevelIndex = Levels.Length - 1;
+
+        GameTime = 0f;
+        ScoreCount = 0;
+        LiveCount = 3;
+
         LoadLevel(LevelIndex);
     }
 

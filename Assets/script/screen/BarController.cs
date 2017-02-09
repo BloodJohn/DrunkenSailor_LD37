@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BarController : MonoBehaviour
@@ -167,12 +168,24 @@ public class BarController : MonoBehaviour
         {
             foreach (var touch in Input.touches)
                 if (touch.phase == TouchPhase.Began)
-                    CoreGame.Instance.RestartGame();
+                    Restart();
         }
         else
         {
             if (Input.GetMouseButtonDown(0))
-                CoreGame.Instance.RestartGame();
+                Restart();
+        }
+    }
+
+    private void Restart()
+    {
+        if (CoreGame.Instance.GameLose)
+        {
+            CoreGame.Instance.RestartGame();
+        }
+        else
+        {
+            SceneManager.LoadScene(TownController.sceneName);
         }
     }
 

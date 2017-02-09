@@ -30,6 +30,7 @@ public class LoadController : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
+            CoreGame.Instance.LevelIndex =0;
             CoreGame.Instance.LoadGame();
         }
 
