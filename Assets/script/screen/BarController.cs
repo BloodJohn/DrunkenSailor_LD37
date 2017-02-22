@@ -36,7 +36,7 @@ public class BarController : MonoBehaviour
     public Text LiveText;
 
     private float _waitTime = float.MinValue;
-    private const float _maxWaitTime = 3f;
+    private const float _maxWaitTime = 2f;
     #endregion
 
     #region unity
@@ -181,6 +181,7 @@ public class BarController : MonoBehaviour
     {
         if (CoreGame.Instance.GameLose)
         {
+            CoreGame.Instance.LevelIndex = 0;
             CoreGame.Instance.RestartGame();
         }
         else

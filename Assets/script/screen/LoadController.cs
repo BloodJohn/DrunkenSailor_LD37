@@ -19,6 +19,8 @@ public class LoadController : MonoBehaviour
         }
 
         LanguageManager.SetDontDestroyOnLoad();*/
+
+        Application.targetFrameRate = 10;
     }
 
     void Start()
