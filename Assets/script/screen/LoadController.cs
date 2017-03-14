@@ -1,15 +1,19 @@
 ﻿/*using GooglePlayGames;
-using GooglePlayGames.BasicApi;
-using SmartLocalization;*/
+using GooglePlayGames.BasicApi;*/
+
+using SmartLocalization;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoadController : MonoBehaviour
 {
     public const string sceneName = "load";
-    
+    public Text hintText;
+    public Text authText;
+
     void Awake()
     {
-        /*if (Application.systemLanguage == SystemLanguage.Russian)
+        if (Application.systemLanguage == SystemLanguage.Russian)
         {
             LanguageManager.Instance.ChangeLanguage("ru");
         }
@@ -18,9 +22,11 @@ public class LoadController : MonoBehaviour
             LanguageManager.Instance.ChangeLanguage("en");
         }
 
-        LanguageManager.SetDontDestroyOnLoad();*/
-
+        LanguageManager.SetDontDestroyOnLoad();
         Application.targetFrameRate = 10;
+
+        hintText.text = LanguageManager.Instance.GetTextValue("intro_hint");
+        authText.text = LanguageManager.Instance.GetTextValue("intro_auth");
     }
 
     void Start()
