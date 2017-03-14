@@ -24,7 +24,15 @@ public class TownController : MonoBehaviour
     {
         _waitTime += Time.deltaTime;
 
-        if (_waitTime < _maxWaitTime) return;
+        if (_waitTime < _maxWaitTime)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                var index = (int) Random.Range(1, 17);
+                ScoreText.text = LanguageManager.Instance.GetTextValue(string.Format("tweet_{0}", index));
+            }
+            return;
+        }
 
         if (Input.GetMouseButtonUp(0))
         {

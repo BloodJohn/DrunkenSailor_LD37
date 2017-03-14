@@ -1,15 +1,21 @@
 ﻿/*using GooglePlayGames;
 using GooglePlayGames.BasicApi;*/
 
+using System;
 using SmartLocalization;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class LoadController : MonoBehaviour
 {
     public const string sceneName = "load";
     public Text hintText;
     public Text authText;
+
+    public Sprite sountOn;
+    public Sprite sountOff;
+    public Image soundImage;
 
     void Awake()
     {
@@ -24,9 +30,11 @@ public class LoadController : MonoBehaviour
 
         LanguageManager.SetDontDestroyOnLoad();
         Application.targetFrameRate = 10;
+        Random.InitState(DateTime.Now.Millisecond);
 
         hintText.text = LanguageManager.Instance.GetTextValue("intro_hint");
         authText.text = LanguageManager.Instance.GetTextValue("intro_auth");
+        
     }
 
     void Start()
@@ -36,13 +44,19 @@ public class LoadController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            CoreGame.Instance.LevelIndex =0;
-            CoreGame.Instance.LoadGame();
-        }
-
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+    }
+
+    public void ClickBackground()
+    {
+        CoreGame.Instance.LevelIndex = 0;
+        CoreGame.Instance.LoadGame();
+    }
+
+    public void ClickSound()
+    {
+        SoundManager.Instance.MuteSound();
+        soundImage.sprite = SoundManager.Instance.IsSound ? sountOn : sountOff;
     }
 
     private void GooglePlayServices()
