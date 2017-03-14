@@ -116,10 +116,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="intro_auth" xml:space="preserve">
+		<value>design by BloodJohn, art by KilkaThePirate</value>
+	</data>
 	<data name="intro_hint" xml:space="preserve">
 		<value>Click To Begin</value>
 	</data>
-	<data name="intro_auth" xml:space="preserve">
-		<value>design by BloodJohn, art by KilkaThePirate</value>
+	<data name="town_successful" xml:space="preserve">
+		<value>Successful {0}. An evening with cat. Tomorrow is {1}!</value>
 	</data>
 </root>

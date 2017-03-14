@@ -122,4 +122,7 @@
 	<data name="intro_hint" xml:space="preserve">
 		<value>Нажми чтобы начать</value>
 	</data>
+	<data name="town_successful" xml:space="preserve">
+		<value>Успешный {0}. Вечер с котом. Завтра будет {1}!</value>
+	</data>
 </root>

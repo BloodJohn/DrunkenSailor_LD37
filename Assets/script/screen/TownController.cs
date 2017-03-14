@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SmartLocalization;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,7 +15,8 @@ public class TownController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ScoreText.text = string.Format("Успешный {0}. Вечер с котом. Завтра будет {1}!", CoreGame.Instance.LevelName, CoreGame.Instance.NextLevelName);
+        ScoreText.text = string.Format(LanguageManager.Instance.GetTextValue("town_successful"), 
+            CoreGame.Instance.LevelName, CoreGame.Instance.NextLevelName);
     }
 
     // Update is called once per frame
