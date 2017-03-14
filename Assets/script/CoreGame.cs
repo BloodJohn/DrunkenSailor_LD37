@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SmartLocalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -63,16 +64,16 @@ public class CoreGame : MonoBehaviour
     /// <summary>Уровни</summary>
     public LevelData[] Levels;
     /// <summary>название текущего уровня</summary>
-    public string LevelName { get { return Levels[LevelIndex].name; } }
+    public string LevelName { get { return LanguageManager.Instance.GetTextValue(Levels[LevelIndex].name); } }
     /// <summary>название следующего уровня</summary>
     public string NextLevelName
     {
         get
         {
             if (LevelIndex+1 >= Levels.Length)
-                return Levels[Levels.Length-1].name;
+                return LanguageManager.Instance.GetTextValue(Levels[Levels.Length-1].name);
 
-            return Levels[LevelIndex+1].name;
+            return LanguageManager.Instance.GetTextValue(Levels[LevelIndex+1].name);
         }
     }
     #endregion

@@ -116,6 +116,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="bar_friday" xml:space="preserve">
+		<value>пятница</value>
+	</data>
+	<data name="bar_monday" xml:space="preserve">
+		<value>понедельник</value>
+	</data>
+	<data name="bar_saturday" xml:space="preserve">
+		<value>суббота</value>
+	</data>
+	<data name="bar_sunday" xml:space="preserve">
+		<value>воскресенье</value>
+	</data>
+	<data name="bar_thursday" xml:space="preserve">
+		<value>четверг</value>
+	</data>
+	<data name="bar_tuesday" xml:space="preserve">
+		<value>вторник</value>
+	</data>
+	<data name="bar_wednesday" xml:space="preserve">
+		<value>среда</value>
+	</data>
 	<data name="intro_auth" xml:space="preserve">
 		<value>Идея BloodJohn, Графика KilkaThePirate</value>
 	</data>

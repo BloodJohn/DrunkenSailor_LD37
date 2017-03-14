@@ -125,4 +125,25 @@
 	<data name="town_successful" xml:space="preserve">
 		<value>Successful {0}. An evening with cat. Tomorrow is {1}!</value>
 	</data>
+	<data name="bar_monday" xml:space="preserve">
+		<value />
+	</data>
+	<data name="bar_tuesday" xml:space="preserve">
+		<value />
+	</data>
+	<data name="bar_wednesday" xml:space="preserve">
+		<value />
+	</data>
+	<data name="bar_thursday" xml:space="preserve">
+		<value />
+	</data>
+	<data name="bar_friday" xml:space="preserve">
+		<value />
+	</data>
+	<data name="bar_saturday" xml:space="preserve">
+		<value />
+	</data>
+	<data name="bar_sunday" xml:space="preserve">
+		<value />
+	</data>
 </root>
