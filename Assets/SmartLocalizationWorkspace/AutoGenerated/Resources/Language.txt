@@ -116,6 +116,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="bar_friday" xml:space="preserve">
+		<value>Friday</value>
+	</data>
+	<data name="bar_monday" xml:space="preserve">
+		<value>Monday</value>
+	</data>
+	<data name="bar_saturday" xml:space="preserve">
+		<value>Saturday</value>
+	</data>
+	<data name="bar_sunday" xml:space="preserve">
+		<value>Sunday</value>
+	</data>
+	<data name="bar_thursday" xml:space="preserve">
+		<value>Thursday</value>
+	</data>
+	<data name="bar_tuesday" xml:space="preserve">
+		<value>Tuesday</value>
+	</data>
+	<data name="bar_wednesday" xml:space="preserve">
+		<value>Wednesday</value>
+	</data>
 	<data name="intro_auth" xml:space="preserve">
 		<value>design by BloodJohn, art by KilkaThePirate</value>
 	</data>
@@ -125,25 +146,55 @@
 	<data name="town_successful" xml:space="preserve">
 		<value>Successful {0}. An evening with cat. Tomorrow is {1}!</value>
 	</data>
-	<data name="bar_monday" xml:space="preserve">
-		<value>Monday</value>
+	<data name="tweet_1" xml:space="preserve">
+		<value>I had a favorite bar. I Recommend #FlappyBeard</value>
 	</data>
-	<data name="bar_tuesday" xml:space="preserve">
-		<value>Tuesday</value>
+	<data name="tweet_2" xml:space="preserve">
+		<value>Gabriel - thanks for a great macaroon! #FlappyBeard</value>
 	</data>
-	<data name="bar_wednesday" xml:space="preserve">
-		<value>Wednesday</value>
+	<data name="tweet_3" xml:space="preserve">
+		<value>Found bar #FlappyBeard where lumberjacks go to drink coffee</value>
 	</data>
-	<data name="bar_thursday" xml:space="preserve">
-		<value>Thursday</value>
+	<data name="tweet_4" xml:space="preserve">
+		<value>Today drank coffee and listened to music in the sun #FlappyBeard</value>
 	</data>
-	<data name="bar_friday" xml:space="preserve">
-		<value>Friday</value>
+	<data name="tweet_5" xml:space="preserve">
+		<value>Finally found #FlappyBeard where there is lavender syrup</value>
 	</data>
-	<data name="bar_saturday" xml:space="preserve">
-		<value>Saturday</value>
+	<data name="tweet_6" xml:space="preserve">
+		<value>Coffee brewed BorsodChem Gavril. Made my day</value>
 	</data>
-	<data name="bar_sunday" xml:space="preserve">
-		<value>Sunday</value>
+	<data name="tweet_7" xml:space="preserve">
+		<value>Next to the house otkrilsya new #FlappyBeard. I like it</value>
+	</data>
+	<data name="tweet_8" xml:space="preserve">
+		<value>Met a girl. Agreed to drink coffee in #FlappyBeard</value>
+	</data>
+	<data name="tweet_9" xml:space="preserve">
+		<value>I'm addicted to coffee #FlappyBeard with ginger carrot</value>
+	</data>
+	<data name="tweet_10" xml:space="preserve">
+		<value>Which syrup is better: yellow Amaretto or red Grenadin?</value>
+	</data>
+	<data name="tweet_11" xml:space="preserve">
+		<value>#FlappyBeard bomber cap-cake, I want the recipe of the cream</value>
+	</data>
+	<data name="tweet_12" xml:space="preserve">
+		<value>The bartender #FlappyBeard cool beard. Who is his Barber?</value>
+	</data>
+	<data name="tweet_13" xml:space="preserve">
+		<value>Girl with purple hair. I want to see you again in #FlappyBeard</value>
+	</data>
+	<data name="tweet_14" xml:space="preserve">
+		<value>Blue coffee syrup blue Curacao #FlappyBeard. Where to buy?</value>
+	</data>
+	<data name="tweet_15" xml:space="preserve">
+		<value>Bartender #FlappyBeard, handsome, he has a girlfriend?</value>
+	</data>
+	<data name="tweet_16" xml:space="preserve">
+		<value>I tried #FlappyBeard coffee strong rare - not much</value>
+	</data>
+	<data name="tweet_17" xml:space="preserve">
+		<value>Forgot the volume of the Block in #FlappyBeard. Tomorrow is going to get to coffee heaven</value>
 	</data>
 </root>

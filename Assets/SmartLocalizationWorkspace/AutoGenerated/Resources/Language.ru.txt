@@ -146,4 +146,55 @@
 	<data name="town_successful" xml:space="preserve">
 		<value>Успешный {0}. Вечер с котом. Завтра будет {1}!</value>
 	</data>
+	<data name="tweet_1" xml:space="preserve">
+		<value>У меня появился любимый бар. Рекомендую #FlappyBeard</value>
+	</data>
+	<data name="tweet_10" xml:space="preserve">
+		<value>Какой сироп лучше: желтый Амарето или красный Гренадин?</value>
+	</data>
+	<data name="tweet_11" xml:space="preserve">
+		<value>#FlappyBeard бомбический кап-кейк, хочу рецепт крема</value>
+	</data>
+	<data name="tweet_12" xml:space="preserve">
+		<value>У бармена #FlappyBeard клёвая борода. Кто его парикмахер?</value>
+	</data>
+	<data name="tweet_13" xml:space="preserve">
+		<value>Девушка с фиолетовыми волосами. Хочу увидеть тебя снова в #FlappyBeard</value>
+	</data>
+	<data name="tweet_14" xml:space="preserve">
+		<value>Голубой кофейный сироп Блю Кюрасао в #FlappyBeard. Где купить?</value>
+	</data>
+	<data name="tweet_15" xml:space="preserve">
+		<value>Бармен #FlappyBeard, красавчик, у него есть девушка?</value>
+	</data>
+	<data name="tweet_16" xml:space="preserve">
+		<value>Попробовал в #FlappyBeard кофе сильной прожарки - не понравилось</value>
+	</data>
+	<data name="tweet_17" xml:space="preserve">
+		<value>Забыл томик Блока в #FlappyBeard. Завтра пойду вызволять из кофейного рая</value>
+	</data>
+	<data name="tweet_2" xml:space="preserve">
+		<value>Гаврила - спасибо за чудесные макаруны! #FlappyBeard</value>
+	</data>
+	<data name="tweet_3" xml:space="preserve">
+		<value>Нашла бар #FlappyBeard куда лесорубы ходят пить кофе</value>
+	</data>
+	<data name="tweet_4" xml:space="preserve">
+		<value>Сегодня пил кофе и слушал солнечную музыку в #FlappyBeard</value>
+	</data>
+	<data name="tweet_5" xml:space="preserve">
+		<value>Наконец нашел #FlappyBeard где есть лавандовый сироп</value>
+	</data>
+	<data name="tweet_6" xml:space="preserve">
+		<value>Кофе сваренное бородачем Гаврилой. Сделало мой день</value>
+	</data>
+	<data name="tweet_7" xml:space="preserve">
+		<value>Рядом с домом открлся новый #FlappyBeard. Мне нравится</value>
+	</data>
+	<data name="tweet_8" xml:space="preserve">
+		<value>Встретил девушку. Договорились выпить кофе в #FlappyBeard</value>
+	</data>
+	<data name="tweet_9" xml:space="preserve">
+		<value>У меня зависимость от кофе #FlappyBeard с имбирным пряником</value>
+	</data>
 </root>
