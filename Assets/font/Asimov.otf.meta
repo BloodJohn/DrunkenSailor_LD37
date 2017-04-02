@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 21f2a4482d4cb154e8c0fb0c16e59b3f
+timeCreated: 1489608212
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Asimov
+  fontNames:
+  - Asimov
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0748834120486f84284009efee973ffb, type: 3}
+  - {fileID: 12800000, guid: 045dda83a852e554ea036e24ac5a60dc, type: 3}
+  - {fileID: 12800000, guid: 01f6ff2619c96a547a19e25a0657b555, type: 3}
+  - {fileID: 12800000, guid: 0d3b1bb9e991c164dba733bb396713f3, type: 3}
+  - {fileID: 12800000, guid: 1740d6ebf5c790b49a5d7a7fe8ef8362, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

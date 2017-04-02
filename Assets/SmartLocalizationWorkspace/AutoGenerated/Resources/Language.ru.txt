@@ -137,6 +137,12 @@
 	<data name="bar_wednesday" xml:space="preserve">
 		<value>среда</value>
 	</data>
+	<data name="gameover_restart" xml:space="preserve">
+		<value>Попробуй еще раз!</value>
+	</data>
+	<data name="gameover_vote" xml:space="preserve">
+		<value>Напиши отзыв. Что тебе понравилось?</value>
+	</data>
 	<data name="intro_auth" xml:space="preserve">
 		<value>Идея BloodJohn, Графика KilkaThePirate</value>
 	</data>
@@ -173,11 +179,74 @@
 	<data name="tweet_17" xml:space="preserve">
 		<value>Забыл томик Блока в #FlappyBeard. Завтра пойду вызволять из кофейного рая</value>
 	</data>
+	<data name="tweet_18" xml:space="preserve">
+		<value>Деловая встреча в #FlappyBeard. Что посоветуете взять?</value>
+	</data>
+	<data name="tweet_19" xml:space="preserve">
+		<value>Я перепробовал все макаруны в #FlappyBeard</value>
+	</data>
 	<data name="tweet_2" xml:space="preserve">
 		<value>Гаврила - спасибо за чудесные макаруны! #FlappyBeard</value>
 	</data>
+	<data name="tweet_20" xml:space="preserve">
+		<value>Лесорубы в #FlappyBeard - не настоящие!</value>
+	</data>
+	<data name="tweet_21" xml:space="preserve">
+		<value>Какие девушки нравятся завсегдатаям #FlappyBeard?</value>
+	</data>
+	<data name="tweet_22" xml:space="preserve">
+		<value>В #FlappyBeard не протолкнуться. Гаврила, как ты успеваешь?</value>
+	</data>
+	<data name="tweet_23" xml:space="preserve">
+		<value>Что значат сердечки на доске в #FlappyBeard?</value>
+	</data>
+	<data name="tweet_24" xml:space="preserve">
+		<value>Лучший из капкейков #FlappyBeard розовый или зеленый?</value>
+	</data>
+	<data name="tweet_25" xml:space="preserve">
+		<value>Пустят ли с собакой в #FlappyBeard? У Гаврилы кот Олег</value>
+	</data>
+	<data name="tweet_26" xml:space="preserve">
+		<value>Мужик с топором в #FlappyBeard. Выглядит грозным</value>
+	</data>
+	<data name="tweet_27" xml:space="preserve">
+		<value>Мне понравился вкусный чизкейк в #FlappyBeard</value>
+	</data>
+	<data name="tweet_28" xml:space="preserve">
+		<value>Кажется я забыл свой топор в #FlappyBeard</value>
+	</data>
+	<data name="tweet_29" xml:space="preserve">
+		<value>Кофе #FlappyBeard пахнет свежими опилками</value>
+	</data>
 	<data name="tweet_3" xml:space="preserve">
 		<value>Нашла бар #FlappyBeard куда лесорубы ходят пить кофе</value>
+	</data>
+	<data name="tweet_30" xml:space="preserve">
+		<value>#FlappyBeard подходит для веганов?</value>
+	</data>
+	<data name="tweet_31" xml:space="preserve">
+		<value>Из какого дерева барная стойка #FlappyBeard</value>
+	</data>
+	<data name="tweet_32" xml:space="preserve">
+		<value>#FlappyBeard девушки с фиолетовыми волосами пьют кофе с зелеными макарунами</value>
+	</data>
+	<data name="tweet_33" xml:space="preserve">
+		<value>Клетчатая рубашка лучше клетчатого пледа</value>
+	</data>
+	<data name="tweet_34" xml:space="preserve">
+		<value>Дверь в бар #FlappyBeard скрипит, как сосна на ветру</value>
+	</data>
+	<data name="tweet_35" xml:space="preserve">
+		<value>Можно ли приходить в #FlappyBeard со своим котом?</value>
+	</data>
+	<data name="tweet_36" xml:space="preserve">
+		<value>Сегодня вечером нарубил чизкейков в #FlappyBeard</value>
+	</data>
+	<data name="tweet_37" xml:space="preserve">
+		<value>Видел симпатичную девушку, но друг сказал, что она - бревно</value>
+	</data>
+	<data name="tweet_38" xml:space="preserve">
+		<value>Кто пойдет в #FlappyBeard, поздравьте Олега, он стал отцом</value>
 	</data>
 	<data name="tweet_4" xml:space="preserve">
 		<value>Сегодня пил кофе и слушал солнечную музыку в #FlappyBeard</value>

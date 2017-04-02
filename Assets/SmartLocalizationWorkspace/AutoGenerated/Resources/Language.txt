@@ -137,6 +137,12 @@
 	<data name="bar_wednesday" xml:space="preserve">
 		<value>Wednesday</value>
 	</data>
+	<data name="gameover_restart" xml:space="preserve">
+		<value>Press to Restart</value>
+	</data>
+	<data name="gameover_vote" xml:space="preserve">
+		<value>Write a review. That you liked?</value>
+	</data>
 	<data name="intro_auth" xml:space="preserve">
 		<value>design by BloodJohn, art by KilkaThePirate</value>
 	</data>
@@ -148,30 +154,6 @@
 	</data>
 	<data name="tweet_1" xml:space="preserve">
 		<value>I had a favorite bar. I Recommend #FlappyBeard</value>
-	</data>
-	<data name="tweet_2" xml:space="preserve">
-		<value>Gabriel - thanks for a great macaroon! #FlappyBeard</value>
-	</data>
-	<data name="tweet_3" xml:space="preserve">
-		<value>Found bar #FlappyBeard where lumberjacks go to drink coffee</value>
-	</data>
-	<data name="tweet_4" xml:space="preserve">
-		<value>Today drank coffee and listened to music in the sun #FlappyBeard</value>
-	</data>
-	<data name="tweet_5" xml:space="preserve">
-		<value>Finally found #FlappyBeard where there is lavender syrup</value>
-	</data>
-	<data name="tweet_6" xml:space="preserve">
-		<value>Coffee brewed BorsodChem Gavril. Made my day</value>
-	</data>
-	<data name="tweet_7" xml:space="preserve">
-		<value>Next to the house otkrilsya new #FlappyBeard. I like it</value>
-	</data>
-	<data name="tweet_8" xml:space="preserve">
-		<value>Met a girl. Agreed to drink coffee in #FlappyBeard</value>
-	</data>
-	<data name="tweet_9" xml:space="preserve">
-		<value>I'm addicted to coffee #FlappyBeard with ginger carrot</value>
 	</data>
 	<data name="tweet_10" xml:space="preserve">
 		<value>Which syrup is better: yellow Amaretto or red Grenadin?</value>
@@ -196,5 +178,92 @@
 	</data>
 	<data name="tweet_17" xml:space="preserve">
 		<value>Forgot the volume of the Block in #FlappyBeard. Tomorrow is going to get to coffee heaven</value>
+	</data>
+	<data name="tweet_18" xml:space="preserve">
+		<value>Business meeting at #FlappyBeard. What advise to take?</value>
+	</data>
+	<data name="tweet_19" xml:space="preserve">
+		<value>I tried all the macaroons in #FlappyBeard</value>
+	</data>
+	<data name="tweet_2" xml:space="preserve">
+		<value>Gabriel - thanks for a great macaroon! #FlappyBeard</value>
+	</data>
+	<data name="tweet_20" xml:space="preserve">
+		<value>Loggers #FlappyBeard - not real!</value>
+	</data>
+	<data name="tweet_21" xml:space="preserve">
+		<value>What girls like regulars #FlappyBeard?</value>
+	</data>
+	<data name="tweet_22" xml:space="preserve">
+		<value>#FlappyBeard not overcrowded. Gabriel, how do you have time?</value>
+	</data>
+	<data name="tweet_23" xml:space="preserve">
+		<value>What are the hearts on the Board at #FlappyBeard?</value>
+	</data>
+	<data name="tweet_24" xml:space="preserve">
+		<value>Best of cupcakes #FlappyBeard pink or green?</value>
+	</data>
+	<data name="tweet_25" xml:space="preserve">
+		<value>Will you let the dog in #FlappyBeard? Gavrila a cat Oleg</value>
+	</data>
+	<data name="tweet_26" xml:space="preserve">
+		<value>The guy with the axe in #FlappyBeard. Looks terrible</value>
+	</data>
+	<data name="tweet_27" xml:space="preserve">
+		<value>I liked the delicious cheesecake in #FlappyBeard</value>
+	</data>
+	<data name="tweet_3" xml:space="preserve">
+		<value>Found bar #FlappyBeard where lumberjacks go to drink coffee</value>
+	</data>
+	<data name="tweet_4" xml:space="preserve">
+		<value>Today drank coffee and listened to music in the sun #FlappyBeard</value>
+	</data>
+	<data name="tweet_5" xml:space="preserve">
+		<value>Finally found #FlappyBeard where there is lavender syrup</value>
+	</data>
+	<data name="tweet_6" xml:space="preserve">
+		<value>Coffee brewed BorsodChem Gavril. Made my day</value>
+	</data>
+	<data name="tweet_7" xml:space="preserve">
+		<value>Next to the house otkrilsya new #FlappyBeard. I like it</value>
+	</data>
+	<data name="tweet_8" xml:space="preserve">
+		<value>Met a girl. Agreed to drink coffee in #FlappyBeard</value>
+	</data>
+	<data name="tweet_9" xml:space="preserve">
+		<value>I'm addicted to coffee #FlappyBeard with ginger carrot</value>
+	</data>
+	<data name="tweet_28" xml:space="preserve">
+		<value>Think I left my axe in #FlappyBeard</value>
+	</data>
+	<data name="tweet_29" xml:space="preserve">
+		<value>Coffee #FlappyBeard smell of fresh sawdust</value>
+	</data>
+	<data name="tweet_30" xml:space="preserve">
+		<value>#FlappyBeard suitable for vegans?</value>
+	</data>
+	<data name="tweet_31" xml:space="preserve">
+		<value>What kind of wood bar #FlappyBeard</value>
+	</data>
+	<data name="tweet_32" xml:space="preserve">
+		<value>#FlappyBeard girl with purple hair drinking coffee with green macaroons</value>
+	</data>
+	<data name="tweet_33" xml:space="preserve">
+		<value>Plaid shirt better than plaid plaid</value>
+	</data>
+	<data name="tweet_34" xml:space="preserve">
+		<value>The door to the bar #FlappyBeard creaks like pine in the wind</value>
+	</data>
+	<data name="tweet_35" xml:space="preserve">
+		<value>Can I come to #FlappyBeard with your cat?</value>
+	</data>
+	<data name="tweet_36" xml:space="preserve">
+		<value>Tonight cut cheesecake in #FlappyBeard</value>
+	</data>
+	<data name="tweet_37" xml:space="preserve">
+		<value>Saw a pretty girl, but a friend said that she was a log</value>
+	</data>
+	<data name="tweet_38" xml:space="preserve">
+		<value>Who will go to #FlappyBeard, congratulate Oleg, he became the father</value>
 	</data>
 </root>

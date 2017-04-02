@@ -10,7 +10,7 @@ public class TownController : MonoBehaviour
     public Text ScoreText;
 
     private float _waitTime = 0;
-    private const float _maxWaitTime = 3f;
+    private const float _maxWaitTime = 4f;
 
     // Use this for initialization
     void Start()
@@ -22,24 +22,22 @@ public class TownController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _waitTime += Time.deltaTime;
+        if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
 
-        if (_waitTime < _maxWaitTime)
-        {
-            if (Input.GetMouseButtonUp(0))
-            {
-                var index = (int) Random.Range(1, 17);
-                ScoreText.text = LanguageManager.Instance.GetTextValue(string.Format("tweet_{0}", index));
-            }
-            return;
-        }
+        _waitTime += Time.deltaTime;
 
         if (Input.GetMouseButtonUp(0))
         {
-            CoreGame.Instance.LevelIndex++;
-            SceneManager.LoadScene(BarController.sceneName);
+            if (_waitTime < _maxWaitTime)
+            {
+                var index = (int)Random.Range(1, 39);
+                ScoreText.text = LanguageManager.Instance.GetTextValue(string.Format("tweet_{0}", index));
+            }
+            else
+            {
+                CoreGame.Instance.LevelIndex++;
+                SceneManager.LoadScene(BarController.sceneName);
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
     }
 }

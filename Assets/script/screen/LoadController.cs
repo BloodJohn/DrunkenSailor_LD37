@@ -19,22 +19,15 @@ public class LoadController : MonoBehaviour
 
     void Awake()
     {
-        if (Application.systemLanguage == SystemLanguage.Russian)
-        {
-            LanguageManager.Instance.ChangeLanguage("ru");
-        }
-        else
-        {
-            LanguageManager.Instance.ChangeLanguage("en");
-        }
+        LanguageManager.Instance.ChangeLanguage(Application.systemLanguage == SystemLanguage.Russian ? "ru" : "en");
 
         LanguageManager.SetDontDestroyOnLoad();
-        Application.targetFrameRate = 10;
         Random.InitState(DateTime.Now.Millisecond);
 
         hintText.text = LanguageManager.Instance.GetTextValue("intro_hint");
         authText.text = LanguageManager.Instance.GetTextValue("intro_auth");
-        
+
+        soundImage.sprite = SoundManager.Instance.IsSound ? sountOn : sountOff;
     }
 
     void Start()
@@ -49,7 +42,6 @@ public class LoadController : MonoBehaviour
 
     public void ClickBackground()
     {
-        CoreGame.Instance.LevelIndex = 0;
         CoreGame.Instance.LoadGame();
     }
 

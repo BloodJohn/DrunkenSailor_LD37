@@ -70,10 +70,10 @@ public class CoreGame : MonoBehaviour
     {
         get
         {
-            if (LevelIndex+1 >= Levels.Length)
-                return LanguageManager.Instance.GetTextValue(Levels[Levels.Length-1].name);
+            if (LevelIndex + 1 >= Levels.Length)
+                return LanguageManager.Instance.GetTextValue(Levels[Levels.Length - 1].name);
 
-            return LanguageManager.Instance.GetTextValue(Levels[LevelIndex+1].name);
+            return LanguageManager.Instance.GetTextValue(Levels[LevelIndex + 1].name);
         }
     }
     #endregion
@@ -85,10 +85,18 @@ public class CoreGame : MonoBehaviour
         Instance = this;
     }
 
-    public void RestartGame()
+    public void GameOver()
     {
+        if (LevelIndex < 6)
+            RestartGame();
+        else
+            SceneManager.LoadScene(GameOverController.sceneName);
+    }
+
+    public void  RestartGame()
+    {
+        LevelIndex = 0;
         SceneManager.LoadScene(BarController.sceneName);
-        Random.InitState(DateTime.Now.Second);
     }
 
     public void Save()
@@ -194,7 +202,7 @@ public class CoreGame : MonoBehaviour
 
         foreach (var group in level.GroupList)
         {
-             time += group.StartPause;
+            time += group.StartPause;
 
             for (var i = 0; i < group.Quantity; i++)
             {

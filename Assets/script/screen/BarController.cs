@@ -181,8 +181,7 @@ public class BarController : MonoBehaviour
     {
         if (CoreGame.Instance.GameLose)
         {
-            CoreGame.Instance.LevelIndex = 0;
-            CoreGame.Instance.RestartGame();
+            CoreGame.Instance.GameOver();
         }
         else
         {
