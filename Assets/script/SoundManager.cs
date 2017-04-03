@@ -7,29 +7,20 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private GameObject Music;
-    /// <summary>Фонт для всех текстовых полей в игре</summary>
-    /*[SerializeField]
-    private Font TextFont;*/
 
     private static readonly string SoundKey = "muteSound";
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this); 
         Instance = this;
 
         Application.targetFrameRate = 10;
 
         IsSound = PlayerPrefs.GetInt(SoundKey, 100) > 0;
-    }
 
-    /*public void SetFontScene()
-    {
-        foreach (var item in GameObject.FindObjectsOfType<Text>())
-        {
-            item.font = TextFont;
-        }
-    }*/
+        Music.SetActive(IsSound);
+    }
 
     public void MuteSound()
     {
