@@ -37,6 +37,12 @@ public class BarController : MonoBehaviour
 
     private float _waitTime = float.MinValue;
     private const float _maxWaitTime = 2f;
+
+
+    private const string gameKey = "gameCount";
+    private int gameCount;
+    private const string customerKey = "customerCount";
+    private int customerCount;
     #endregion
 
     #region unity
@@ -45,6 +51,13 @@ public class BarController : MonoBehaviour
         CoreGame.Instance.StartBar();
 
         ShowStats();
+    }
+
+    public void Start()
+    {
+        gameCount = PlayerPrefs.GetInt(gameKey, 0);
+        customerCount = PlayerPrefs.GetInt(customerKey, 0);
+        StartGameAchievement();
     }
 
     void Update()
@@ -122,6 +135,8 @@ public class BarController : MonoBehaviour
             item.transform.localPosition = new Vector3(point.x, point.y, -0.01f);
             item.GetComponentInChildren<SpriteRenderer>().sprite = GoodSprite[(int)clickItem.ItemType];
             Destroy(item, 3f);
+
+            CustomerAchievement();
         }
         else
         {
@@ -140,6 +155,8 @@ public class BarController : MonoBehaviour
 
         foreach (var client in СlientList) client.Hide();
         _waitTime = 0f;
+
+        FirstGameAchievement();
     }
 
     private void ShowLose()
@@ -150,6 +167,8 @@ public class BarController : MonoBehaviour
 
         foreach (var client in СlientList) client.Hide();
         _waitTime = 0f;
+
+        FirstWeekAchievement();
     }
 
     private void ShowGame()
@@ -202,21 +221,72 @@ public class BarController : MonoBehaviour
     #endregion
 
     #region achievements
-
-    /// <summary>большой улов</summary>
-    private void BigFishAchievement(int fishing)
+    /// <summary>окончание первой игры</summary>
+    private void FirstGameAchievement()
     {
-        /*if (fishing < 3) return;
-        if (PlayerPrefs.HasKey(GPGSIds.achievement_big_fish)) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_first_game)) return;
 
-        Social.ReportProgress(GPGSIds.achievement_big_fish, 100.0f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_first_game, 100.0f, (bool success) =>
         {
             // handle success or failure
             if (success)
             {
-                PlayerPrefs.SetInt(GPGSIds.achievement_big_fish, 100);
+                PlayerPrefs.SetInt(GPGSIds.achievement_first_game, 100);
             }
-        });*/
+        });
+    }
+
+    /// <summary>окончание первой недели</summary>
+    private void FirstWeekAchievement()
+    {
+        if (CoreGame.Instance.LevelIndex<6) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_first_weekend)) return;
+
+        Social.ReportProgress(GPGSIds.achievement_first_weekend, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_first_weekend, 100);
+            }
+        });
+    }
+
+    /// <summary>начало 10 игры</summary>
+    private void StartGameAchievement()
+    {
+        if (CoreGame.Instance.LevelIndex>0) return;
+        gameCount++;
+        PlayerPrefs.SetInt(gameKey,gameCount);
+        if (gameCount<10) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_10_games)) return;
+
+        Social.ReportProgress(GPGSIds.achievement_10_games, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_10_games, 100);
+            }
+        });
+    }
+
+    /// <summary>10 посетителей</summary>
+    private void CustomerAchievement()
+    {
+        customerCount++;
+        PlayerPrefs.SetInt(customerKey, customerCount);
+        if (customerCount < 10) return;
+        if (PlayerPrefs.HasKey(GPGSIds.achievement_10_customer)) return;
+
+        Social.ReportProgress(GPGSIds.achievement_10_customer, 100.0f, (bool success) =>
+        {
+            // handle success or failure
+            if (success)
+            {
+                PlayerPrefs.SetInt(GPGSIds.achievement_10_customer, 100);
+            }
+        });
     }
     #endregion
 }

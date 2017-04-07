@@ -211,7 +211,7 @@ public class CoreGame : MonoBehaviour
             }
         }
 
-        Debug.LogFormat("Последний посетитель: {0}", time);
+        //Debug.LogFormat("Последний посетитель: {0}", time);
     }
 
     /// <summary>добавляет нового покупателя в очередь</summary>
