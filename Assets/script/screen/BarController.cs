@@ -156,7 +156,7 @@ public class BarController : MonoBehaviour
         foreach (var client in СlientList) client.Hide();
         _waitTime = 0f;
 
-        FirstGameAchievement();
+        FirstWeekAchievement();
     }
 
     private void ShowLose()
@@ -168,7 +168,7 @@ public class BarController : MonoBehaviour
         foreach (var client in СlientList) client.Hide();
         _waitTime = 0f;
 
-        FirstWeekAchievement();
+        FirstGameAchievement();
     }
 
     private void ShowGame()

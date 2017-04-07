@@ -36,12 +36,11 @@ public class TownController : MonoBehaviour
             {
                 var index = (int)Random.Range(1, 39);
                 ScoreText.text = LanguageManager.Instance.GetTextValue(string.Format("tweet_{0}", index));
-                tweetCount++;
+
+                TweetAchievement();
             }
             else
             {
-                TweetAchievement();
-
                 CoreGame.Instance.LevelIndex++;
                 SceneManager.LoadScene(BarController.sceneName);
             }
@@ -51,6 +50,7 @@ public class TownController : MonoBehaviour
     /// <summary>окончание первой недели</summary>
     private void TweetAchievement()
     {
+        tweetCount++;
         PlayerPrefs.SetInt(tweetKey, tweetCount);
         if (tweetCount < 10) return;
         if (PlayerPrefs.HasKey(GPGSIds.achievement_10_tweets)) return;
