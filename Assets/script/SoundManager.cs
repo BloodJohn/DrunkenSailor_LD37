@@ -12,13 +12,11 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this); 
         Instance = this;
-
+        DontDestroyOnLoad(this); 
         Application.targetFrameRate = 10;
 
         IsSound = PlayerPrefs.GetInt(SoundKey, 100) > 0;
-
         Music.SetActive(IsSound);
     }
 

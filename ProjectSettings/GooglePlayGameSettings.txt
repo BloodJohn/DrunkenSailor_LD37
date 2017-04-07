@@ -1,0 +1,9 @@
+lastUpgrade=00937
+proj.pluginVersion=0.9.37
+proj.AppId=10784108782
+and.BundleId=com.StarAge.FlappyBeard
+proj.classDir=Assets
+proj.ConstantsClassName=GPGSIds
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--%0d%0aGoogle+Play+game+services+IDs.%0d%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0d%0a--%3e%0d%0a%3cresources%3e%0d%0a++%3cstring+name%3d%22app_id%22%3e10784108782%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22package_name%22%3ecom.StarAge.FlappyBeard%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_first_game%22%3eCggI7uGhligQAhAB%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_first_weekend%22%3eCggI7uGhligQAhAC%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_10_tweets%22%3eCggI7uGhligQAhAD%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_10_games%22%3eCggI7uGhligQAhAE%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_10_customer%22%3eCggI7uGhligQAhAF%3c%2fstring%3e%0d%0a%3c%2fresources%3e%0d%0a
+and.ClientId=
+android.SetupDone=true
